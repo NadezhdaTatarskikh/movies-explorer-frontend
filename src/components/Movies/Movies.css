@@ -3,12 +3,14 @@
    flex-direction: column;
    margin: 0 auto;
    max-width: 1140px;
+   width: 100%;
 }
 
 .movies__button {
+   max-width: 1140px;
+   width: 100%;
    box-sizing: border-box;
    margin: 50px auto 80px;
-   width: 1140px;
    color: #FFF;
    text-align: center;
    font-size: 12px;
@@ -20,7 +22,7 @@
    background: #2F2F2F;
    border: none;
    cursor: pointer;
-   padding: 11px 0 9px;
+   padding: 11px 470px 9px;
 }
 
 .movies__button:hover {
@@ -32,9 +34,6 @@
    .movies {
       padding-left: 30px;
       padding-right: 30px;
-   }
-   .movies__button {
-      width: 708px;
    }
 }
 
