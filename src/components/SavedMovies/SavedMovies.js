@@ -1,4 +1,3 @@
-import React from 'react';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import Header from '../Header/Header';
@@ -11,7 +10,7 @@ const SavedMovies = ({ loggedIn }) => {
       <Header loggedIn={loggedIn} />
       <main className='saved-movies'>
         <SearchForm />
-        <MoviesCardList isMovies={false} />
+        <MoviesCardList />
       </main>
       <Footer />
     </>

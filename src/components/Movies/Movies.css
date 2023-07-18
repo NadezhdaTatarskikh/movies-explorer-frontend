@@ -1,28 +1,25 @@
 .movies {
    display: flex;
    flex-direction: column;
+   justify-content: center;
    margin: 0 auto;
-   max-width: 1140px;
-   width: 100%;
+   width: calc(100% - 140px);
 }
 
 .movies__button {
-   max-width: 1140px;
-   width: 100%;
    box-sizing: border-box;
-   margin: 50px auto 80px;
+   margin: 50px 0 80px;
    color: #FFF;
    text-align: center;
    font-size: 12px;
    font-style: normal;
    font-weight: 500;
    line-height: normal;
-   align-items: center;
    border-radius: 6px;
    background: #2F2F2F;
    border: none;
    cursor: pointer;
-   padding: 11px 470px 9px;
+   padding: 11px 0 9px;
 }
 
 .movies__button:hover {
