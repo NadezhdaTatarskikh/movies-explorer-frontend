@@ -1,0 +1,35 @@
+  .button {
+    margin: 0 0 16px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: normal;
+    font-style: normal;
+    width: 396px;
+    color: #FFF;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    background: #4285f4;
+    padding: 14px 0 15px;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    opacity: 0.5;
+    transition: opacity 0.5s linear;
+  }
+
+  .button:disabled {
+    background: #6a6c70;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 430px) {
+    .button {
+      font-size: 12px;
+      line-height: 15px;
+      max-width: 260px;
+      padding: 15px auto;
+      
+    }
+  }

@@ -1,0 +1,134 @@
+.burger {
+   display: none;
+}
+
+@media screen and (max-width: 768px) {
+   .burger_is-active {
+      display: block;
+      z-index: 3;
+      transition: 0.9s ease;
+   }
+
+   .burger__backdrop {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+   }
+
+   .burger__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 68%;
+      height: 100%;
+      background: #202020;
+   }
+
+   .burger__close {
+      position: absolute;
+      top: 22.44px;
+      right: 22.44px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: none;
+      background-image: url('../../images/icon-close.svg');
+      padding: 0;
+   }
+
+   .burger__menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      margin: 159px auto 0;
+      padding: 0;
+   }
+
+   .burger__link {
+      color: #FFF;
+      text-align: center;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-decoration: none;
+      cursor: pointer;
+   }
+
+   .burger__link_active {
+      padding-bottom: 4px;
+      border-bottom: 3px solid #FFF;
+   }
+
+   .burger__button_account {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      border-radius: 20px;
+      border: none;
+      background: #313131;
+      color: #FFF;
+      padding: 8px 20px;
+      cursor: pointer;
+      margin-bottom: 90px;
+   }
+
+   .burger__link:hover,
+   .burger__button:hover,
+   .burger__button_account:hover {
+      transition: opacity 0.5s linear;
+      opacity: 0.5;
+   }
+}
+
+@media screen and (max-width: 430px) {
+   .burger__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: #202020;
+   }
+
+   .burger__close {
+      top: 13px;
+      right: 12px;
+      width: 22px;
+      height: 22px;
+      background-size: cover;
+   }
+
+   .burger__menu {
+      gap: 22px;
+      margin: 144px auto 0;
+   }
+
+   .burger__link {
+      padding-bottom: 7px;
+   }
+
+   .burger__link_active {
+      padding-bottom: 5px;
+   }
+
+   .burger__button_account {
+      margin-bottom: 76px;
+   }
+}
