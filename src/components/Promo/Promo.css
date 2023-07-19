@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    gap: 151px;
+    align-items: center;
     max-width: 1200px;
     width: calc(100% - 40px);
     min-height: 493px;
@@ -23,20 +23,18 @@
     letter-spacing: -2px;
     max-width: 730px;
     margin: 0 auto;
+    padding-top: 160px;
+    padding-bottom: 151px;
 }
 
 @media screen and (max-width: 768px) {
-    .promo {
-        width: calc(100% - 40px);
-        min-height: 834px;
-        gap: 314px;
-    }
-
     .promo__title {
         font-size: 40px;
         line-height: 52px;
         letter-spacing: -1.6px;
         max-width: 680px;
+        padding-top: 350px;
+        padding-bottom: 314px;
     }
 }
 
@@ -44,7 +42,6 @@
     .promo {
         width: calc(100% - 28px);
         min-height: 586px;
-        gap: 212px;
         padding-bottom: 17px;
     }
 
@@ -54,5 +51,7 @@
         letter-spacing: -1.16px;
         max-width: 292px;
         margin: 0 auto;
+        padding-top: 220px;
+        padding-bottom: 212px;
     }
 }

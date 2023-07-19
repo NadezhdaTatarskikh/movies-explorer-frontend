@@ -22,4 +22,4 @@ const Movies = ({ loggedIn }) => {
 
 export default Movies;
 
-// Movies — компонент страницы с поиском по фильмам. 
+// Movies — компонент страницы с поиском по фильмам.

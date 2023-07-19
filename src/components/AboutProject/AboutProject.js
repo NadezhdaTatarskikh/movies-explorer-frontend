@@ -38,3 +38,5 @@ const AboutProject = () => {
 };
 
 export default AboutProject;
+
+//AboutProject — компонент с описанием дипломного проекта.

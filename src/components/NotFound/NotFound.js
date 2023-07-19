@@ -16,5 +16,4 @@ const NotFound = () => {
 
 export default NotFound;
 
-
 // NotFound — компонент страницы c ошибкой 404.

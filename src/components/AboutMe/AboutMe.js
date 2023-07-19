@@ -10,7 +10,7 @@ const AboutMe = () => {
         <div className='about-me__info'>
           <h3 className='about_me__name'>Надежда</h3>
           <p className='aboute-me__profession'>
-            Фронтенд-разработчик/Администратор магазина, 41 год
+            Фронтенд-разработчик/Бухгалтер, 41 год
           </p>
           <p className='about-me__description'>
             Я живу в Кирове, закончила факультет экономики РУИ. На данный момент

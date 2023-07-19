@@ -19,5 +19,4 @@ const SavedMovies = ({ loggedIn }) => {
 
 export default SavedMovies;
 
-
 // SavedMovies — компонент страницы с сохранёнными карточками фильмов.

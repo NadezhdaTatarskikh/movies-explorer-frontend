@@ -26,6 +26,8 @@ const Register = () => {
           label='E-mail'
           name='email'
           type='email'
+          minLength='8'
+          maxLength='30'
           error=''
           required
         />
@@ -33,8 +35,9 @@ const Register = () => {
           label='Пароль'
           name='password'
           type='password'
-          error='Что-то пошло не так...'
           minLength='8'
+          maxLength='30'
+          error='Что-то пошло не так...'
           required
         />
       </Form>

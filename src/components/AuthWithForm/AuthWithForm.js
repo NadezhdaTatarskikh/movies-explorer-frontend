@@ -11,3 +11,5 @@ const AuthWithForm = ({ label, error, name, type, ...rest }) => {
 };
 
 export default AuthWithForm;
+
+// компонент инпут для формы авторизации пользователей

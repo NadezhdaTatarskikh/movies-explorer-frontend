@@ -10,9 +10,8 @@ import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 
 function App() {
-
   /**Переменные состояния зарегистрированного пользователя*/
-  // eslint-disable-next-line 
+  // eslint-disable-next-line
   const [loggedIn, setLoggedIn] = useState(true);
 
   return (
@@ -20,14 +19,19 @@ function App() {
       <Routes>
         <Route path='/' element={<Main loggedIn={loggedIn} />} />
         <Route path='/movies' element={<Movies loggedIn={loggedIn} />} />
-        <Route path='/saved-movies' element={<SavedMovies loggedIn={loggedIn} />} />
+        <Route
+          path='/saved-movies'
+          element={<SavedMovies loggedIn={loggedIn} />}
+        />
         <Route path='/profile' element={<Profile loggedIn={loggedIn} />} />
         <Route path='/signin' element={<Login />} />
         <Route path='/signup' element={<Register />} />
-        <Route path='*'element={<NotFound />}/>
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   );
 }
 
 export default App;
+
+//App — корневой компонент приложения, его создаёт CRA.

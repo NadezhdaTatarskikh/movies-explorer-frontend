@@ -31,16 +31,10 @@
     color: #ffffff;
 }
 
-@media screen and (max-width: 768px) {
-    .nav-info__list {
-        margin-bottom: 30px;
-    }
-}
 
 @media screen and (max-width: 430px) {
     .nav-info__list {
         width: 258px;
-        margin-bottom: 17px;
     }
 
     .nav-info__item {

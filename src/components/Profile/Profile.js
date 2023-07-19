@@ -58,5 +58,4 @@ const Profile = ({ loggedIn }) => {
 
 export default Profile;
 
-
 // Profile — компонент страницы изменения профиля.

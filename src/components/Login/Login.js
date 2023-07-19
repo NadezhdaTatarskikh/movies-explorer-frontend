@@ -17,6 +17,8 @@ const Login = () => {
           label='E-mail'
           name='email'
           type='email'
+          minLength='8'
+          maxLength='30'
           error=''
           required
         />
@@ -26,6 +28,7 @@ const Login = () => {
           type='password'
           error=''
           minLength='8'
+          maxLength='30'
           required
         />
       </Form>
@@ -35,6 +38,5 @@ const Login = () => {
 };
 
 export default Login;
-
 
 // Login — компонент страницы авторизации.

@@ -96,7 +96,6 @@
     display: none;
 }
 
-
 @media screen and (max-width: 768px) {
 
     .navigation__movies-link,
@@ -121,9 +120,10 @@
 @media screen and (max-width: 430px) {
     .burger__button {
         width: 38px;
-    height: 36px;
-    background-size: contain;
+        height: 36px;
+        background-size: contain;
     }
+
     .navigation__link {
         font-size: 10px;
         margin-right: 14px;

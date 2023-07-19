@@ -13,8 +13,8 @@ const Portfolio = () => {
             href='https://github.com/NadezhdaTatarskikh/how-to-learn/'
             target='_blank'
           >
-            Статичный сайт
-            <span className='portfolio__arrow'>&#8599;</span>
+            <p className='portfolio__link-title'>Статичный сайт</p>
+            <div className='portfolio__link-arrow'></div>
           </a>
         </li>
         <li className='portfolio__link-container'>
@@ -24,8 +24,8 @@ const Portfolio = () => {
             href='https://github.com/NadezhdaTatarskikh/russian-travel/'
             target='_blank'
           >
-            Адаптивный сайт
-            <span className='portfolio__arrow'>&#8599;</span>
+            <p className='portfolio__link-title'>Адаптивный сайт</p>
+            <div className='portfolio__link-arrow'></div>
           </a>
         </li>
         <li className='portfolio__link-container'>
@@ -35,8 +35,8 @@ const Portfolio = () => {
             href='https://domainname.students.tat.nomoredomains.work/'
             target='_blank'
           >
-            Одностраничное приложение
-            <span className='portfolio__arrow'>&#8599;</span>
+            <p className='portfolio__link-title'>Одностраничное приложение</p>
+            <div className='portfolio__link-arrow'></div>
           </a>
         </li>
       </ul>
