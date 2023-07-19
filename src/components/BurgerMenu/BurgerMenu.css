@@ -52,6 +52,7 @@
       align-items: center;
       gap: 28px;
       margin: 159px auto 0;
+      padding: 0;
    }
 
    .burger__link {
@@ -103,10 +104,7 @@
 
    .burger__menu {
       gap: 22px;
-      margin-top: 144px;
-      margin-left: 10px;
-      margin-right: 10px;
-      margin-bottom: 444px;
+      margin: 144px 10px 444px;
    }
 
    .burger__link {

@@ -3,8 +3,8 @@
    flex-direction: column;
    justify-content: center;
    margin: 0 auto;
-   width: calc(100% - 140px);
    max-width: 1140px;
+   width: calc(100% - 140px);
 }
 
 .movies__button {
