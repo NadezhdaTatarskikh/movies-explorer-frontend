@@ -30,13 +30,16 @@
 }
 
 .movies-card__name {
-   margin: 16px 12px 16px 16px;
-   max-width: 260px;
+   margin-top: 16px;
+   margin-bottom: 17px;
+   margin-left: 16px;
+   max-width: 290px;
+   width: 100%;
    color: #FFF;
-   font-size: 14px;
+   font-size: 13px;
    font-style: normal;
    font-weight: 500;
-   line-height: normal;
+   line-height: 16px;
 }
 
 .movies-card__button {
@@ -90,8 +93,10 @@
    }
 
    .movies-card__name {
-      margin: 14px 21px 15px 14px;
-      font-size: 13px;
+      margin-top: 14px;
+   margin-bottom: 15px;
+   margin-left: 14px;
+   max-width: 260px;
    }
 
    .movies-card__button {
@@ -100,6 +105,7 @@
    }
 
    .movies-card__duration {
+      margin: 0;
       padding-left: 14px;
       padding-bottom: 14px;
    }

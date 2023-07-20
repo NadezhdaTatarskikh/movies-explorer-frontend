@@ -6,7 +6,6 @@ const BurgerMenu = ({ onClose, isOpen }) => {
 
   return (
     <div className={`burger ${popupIsOpen}`}>
-      <div className='burger__backdrop'>
         <div className='burger__container'>
           <button type='button' className='burger__close' onClick={onClose} />
           <div className='burger__menu'>
@@ -42,7 +41,6 @@ const BurgerMenu = ({ onClose, isOpen }) => {
           </Link>
         </div>
       </div>
-    </div>
   );
 };
 
