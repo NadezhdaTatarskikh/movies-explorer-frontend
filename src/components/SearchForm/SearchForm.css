@@ -30,7 +30,7 @@
 
 .seachform__input:focus {
     outline: none;
-    opacity: .4;
+    border: 1px solid #3DDC84;
 }
 
 .searchform__button {
@@ -48,6 +48,11 @@
     background: #4285F4;
     border: none;
     cursor: pointer;
+}
+
+.searchform__button:hover {
+    transition: opacity 0.5s linear;
+    opacity: 0.5;
 }
 
 @media screen and (max-width: 768px) {

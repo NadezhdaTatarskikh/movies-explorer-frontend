@@ -11,13 +11,14 @@
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   gap: 37px 24px;
 }
 
+
 @media screen and (max-width: 768px) {
   .cards {
+    max-width: 708px;
     padding-bottom: 30px;
   }
 

@@ -20,6 +20,7 @@
    font-size: 13px;
    line-height: normal;
    color: #FFF;
+   outline: none;
    background: #2F2F2F;
    border-radius: 8px;
    border: none;
@@ -27,9 +28,8 @@
    padding: 15px;
 }
 
-.auth-form__input:focus {
-   outline: none;
-   border: 1px solid #ee3465;
+.auth-form__input:last-of-type {
+   color: #EE3465;
 }
 
 .auth-form__error {

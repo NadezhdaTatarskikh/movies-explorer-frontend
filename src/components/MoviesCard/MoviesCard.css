@@ -94,9 +94,9 @@
 
    .movies-card__name {
       margin-top: 14px;
-   margin-bottom: 15px;
-   margin-left: 14px;
-   max-width: 260px;
+      margin-bottom: 15px;
+      margin-left: 14px;
+      max-width: 260px;
    }
 
    .movies-card__button {
@@ -111,7 +111,7 @@
    }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 430px) {
    .movies-card {
       width: 300px;
       height: 237px;

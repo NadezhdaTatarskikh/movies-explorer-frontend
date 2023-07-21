@@ -9,7 +9,6 @@ const MoviesCardList = () => {
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />
-        
       </div>
     </section>
   );
