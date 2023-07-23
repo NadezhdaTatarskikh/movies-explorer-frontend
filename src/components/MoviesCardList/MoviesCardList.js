@@ -5,11 +5,11 @@ import './MoviesCardList.css';
 const MoviesCardList = () => {
   return (
     <section className='cards'>
-      <div className='cards__list'>
+      <ul className='cards__list'>
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />
-      </div>
+      </ul>
     </section>
   );
 };

@@ -8,7 +8,7 @@ const Auth = ({ title, children, subtitle, route, link }) => {
       <Link to='/'>
         <img className='auth__logo' src={Logo} alt='Логотип'></img>
       </Link>
-      <h2 className='auth__title'>{title}</h2>
+      <h1 className='auth__title'>{title}</h1>
       {children}
       <p className='auth__subtitle'>
         {subtitle}

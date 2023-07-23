@@ -7,7 +7,7 @@ const Profile = ({ loggedIn }) => {
     <>
       <Header loggedIn={loggedIn} />
       <section className='profile'>
-        <h3 className='profile__title'>Привет, Надежда!</h3>
+        <h1 className='profile__title'>Привет, Надежда!</h1>
         <form className='profile__form'>
           <div className='profile__data'>
             <label className='profile__label'>Имя</label>

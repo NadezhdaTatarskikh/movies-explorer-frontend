@@ -9,7 +9,7 @@ const FilterCheckbox = () => {
         type='checkbox'
         value='yes'
       />
-      <label className='checkbox__label' for='checkbox'>
+      <label className='checkbox__label' htmlFor='checkbox'>
         Короткометражки
       </label>
     </div>

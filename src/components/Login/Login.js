@@ -6,34 +6,38 @@ import AuthWithForm from '../AuthWithForm/AuthWithForm';
 
 const Login = () => {
   return (
-    <Auth
-      title='Рады видеть!'
-      subtitle='Ещё не зарегистрированы?'
-      route='/signup'
-      link='Регистрация'
-    >
-      <Form>
-        <AuthWithForm
-          label='E-mail'
-          name='email'
-          type='email'
-          minLength='8'
-          maxLength='30'
-          error=''
-          required
-        />
-        <AuthWithForm
-          label='Пароль'
-          name='password'
-          type='password'
-          error=''
-          minLength='8'
-          maxLength='30'
-          required
-        />
-      </Form>
-      <ButtonSubmit text='Войти' />
-    </Auth>
+    <>
+      <Auth
+        title='Рады видеть!'
+        subtitle='Ещё не зарегистрированы?'
+        route='/signup'
+        link='Регистрация'
+      >
+        <Form>
+          <AuthWithForm
+            label='E-mail'
+            name='email'
+            type='email'
+            placeholder='E-mail'
+            minLength='8'
+            maxLength='30'
+            error=''
+            required
+          />
+          <AuthWithForm
+            label='Пароль'
+            name='password'
+            type='password'
+            placeholder='Пароль'
+            error=''
+            minLength='8'
+            maxLength='30'
+            required
+          />
+        </Form>
+        <ButtonSubmit text='Войти' />
+      </Auth>
+    </>
   );
 };
 

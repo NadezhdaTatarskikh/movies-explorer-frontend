@@ -32,7 +32,7 @@
     max-width: 550px;
 }
 
-.about-project__subtitle {
+.about-project__name {
     margin: 0;
     font-size: 20px;
     font-style: normal;
@@ -111,9 +111,9 @@
     }
 
     .about-project__text {
-        font-family: 'Suisse Intl';
         font-weight: 400;
         color: #A0A0A0;
+        font-family: "Suisse Intl", "Arial", sans-serif;
     }
 }
 
@@ -138,7 +138,7 @@
         gap: 16px;
     }
 
-    .about-project__subtitle {
+    .about-project__name {
         font-size: 18px;
         letter-spacing: -0.72px;
     }
@@ -161,7 +161,6 @@
 
     .about-project__text {
         font-size: 11px;
-        font-family: 'Suisse Intl';
         color: #A0A0A0;
     }
 }

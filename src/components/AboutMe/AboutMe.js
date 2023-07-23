@@ -4,7 +4,7 @@ import myPhoto from '../../images/myPhoto.jpg';
 
 const AboutMe = () => {
   return (
-    <section id='student' className='about-me'>
+    <section className='about-me' id='student'>
       <h2 className='about-me__title'>Студент</h2>
       <div className='about-me__container'>
         <div className='about-me__info'>
@@ -20,7 +20,7 @@ const AboutMe = () => {
             музыку, увлекаюсь бегом.
           </p>
           <a
-            className='about-me__link'
+            className='about-me__link link-hover'
             href='https://github.com/NadezhdaTatarskikh'
             target='_blank'
             rel='noreferrer'

@@ -19,7 +19,6 @@
       transition: linear 0.5s;
    }
 
-
    .burger__container {
       width: 68%;
       top: 0;
@@ -69,7 +68,7 @@
       cursor: pointer;
    }
 
-   .burger__link_active {
+   .burger__link.active {
       padding-bottom: 4px;
       border-bottom: 2px solid #FFF;
    }
