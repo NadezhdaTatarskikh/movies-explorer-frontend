@@ -20,7 +20,7 @@ const BurgerMenu = ({ onClose, isOpen }) => {
           </NavLink>
         </div>
         <Link to='/profile'>
-          <button className='burger__button_account' type='button'>
+          <button className='burger__button-account' type='button'>
             Аккаунт
           </button>
         </Link>

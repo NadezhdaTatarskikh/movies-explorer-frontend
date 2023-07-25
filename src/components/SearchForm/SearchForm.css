@@ -69,14 +69,12 @@
     }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 320px) {
 
     .searchform {
         max-width: 292px;
-        height: 148px;
+        width: calc(100% - 14px);
         padding-top: 81px;
-        margin-right: 14px;
-        margin-left: 10px;
     }
 
     .searchform__input {

@@ -4,12 +4,12 @@ import myPhoto from '../../images/myPhoto.jpg';
 
 const AboutMe = () => {
   return (
-    <section className='about-me' id='student'>
+    <section className='about-me' id='about-me'>
       <h2 className='about-me__title'>Студент</h2>
       <div className='about-me__container'>
-        <div className='about-me__info'>
-          <h3 className='about_me__name'>Надежда</h3>
-          <p className='aboute-me__profession'>
+        <div className='about-me__container-text'>
+          <h3 className='about-me__name'>Надежда</h3>
+          <p className='about-me__profession'>
             Фронтенд-разработчик/Бухгалтер, 41 год
           </p>
           <p className='about-me__description'>

@@ -73,7 +73,7 @@
       border-bottom: 2px solid #FFF;
    }
 
-   .burger__button_account {
+   .burger__button-account {
       margin-top: 615px;
       font-weight: 500;
       font-size: 14px;
@@ -88,7 +88,7 @@
 
    .burger__link:hover,
    .burger__close:hover,
-   .burger__button_account:hover {
+   .burger__button-account:hover {
       transition: opacity 0.5s linear;
       opacity: 0.5;
    }
@@ -114,7 +114,7 @@
       padding-bottom: 7px;
    }
 
-   .burger__button_account {
+   .burger__button-account {
       margin-top: 438px;
    }
 }

@@ -30,14 +30,14 @@ const Navigation = ({ loggedIn }) => {
         <div className='navigation__movies'>
           <NavLink
             className='navigation__movies-link'
-            activeclassName='navigation__movies-link_active'
+            activeclassname='navigation__movies-link_active'
             to='/movies'
           >
             Фильмы
           </NavLink>
           <NavLink
             className='navigation__movies-link'
-            activeclassName='navigation__movies-link_active'
+            activeclassname='navigation__movies-link_active'
             to='/saved-movies'
           >
             Сохранённые фильмы
@@ -50,7 +50,7 @@ const Navigation = ({ loggedIn }) => {
             </Link>
           </nav>
           <button
-            className='burger__button'
+            className='navigation__burger-button'
             type='button'
             onClick={openPopup}
           />

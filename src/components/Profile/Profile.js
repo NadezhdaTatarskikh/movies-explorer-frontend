@@ -1,8 +1,10 @@
 import React from 'react';
 import './Profile.css';
 import Header from '../Header/Header';
+import { useNavigate } from 'react-router-dom';
 
-const Profile = ({ loggedIn }) => {
+const Profile = ({ loggedIn, onSignOut }) => {
+  const navigate = useNavigate();
   return (
     <>
       <Header loggedIn={loggedIn} />
@@ -44,8 +46,10 @@ const Profile = ({ loggedIn }) => {
               Редактировать
             </button>
             <button
+              to='/'
               className='profile__button profile__button_exit'
               type='button'
+              onClick={() => navigate('/')}
             >
               Выйти из аккаунта
             </button>

@@ -21,7 +21,7 @@ const Portfolio = () => {
           <a
             className='portfolio__link'
             rel='noreferrer'
-            href='https://github.com/NadezhdaTatarskikh/russian-travel/'
+            href='https://nadezhdatatarskikh.github.io/russian-travel/'
             target='_blank'
           >
             <p className='portfolio__link-title'>Адаптивный сайт</p>
