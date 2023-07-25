@@ -19,10 +19,8 @@ const BurgerMenu = ({ onClose, isOpen }) => {
             Сохранённые фильмы
           </NavLink>
         </div>
-        <Link to='/profile'>
-          <button className='burger__button-account' type='button'>
-            Аккаунт
-          </button>
+        <Link to='/profile' className='burger__link burger__link_active'>
+          Аккаунт
         </Link>
       </div>
     </div>

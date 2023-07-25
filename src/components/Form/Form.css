@@ -3,7 +3,6 @@
    flex-direction: column;
    gap: 10px;
    width: 396px;
-   height: 335px;
    padding-bottom: 69px;
    box-sizing: border-box;
    margin: 0;
@@ -16,7 +15,6 @@
 @media screen and (max-width: 430px) {
    .form {
       width: 260px;
-      height: 423px;
       padding-bottom: 157px;
    }
 }

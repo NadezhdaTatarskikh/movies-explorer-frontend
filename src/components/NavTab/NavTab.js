@@ -16,7 +16,7 @@ const NavTab = () => {
           </a>
         </li>
         <li className='nav-info__item'>
-          <a className='link nav-info__link' href='#student'>
+          <a className='link nav-info__link' href='#about-me'>
             Студент
           </a>
         </li>

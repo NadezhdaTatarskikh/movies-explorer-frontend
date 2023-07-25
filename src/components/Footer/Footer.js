@@ -5,9 +5,9 @@ const Footer = () => {
 
   return (
     <section className='footer'>
-      <p className='footer__text'>
+      <h2 className='footer__text'>
         Учебный проект Яндекс.Практикум х BeatFilm.
-      </p>
+      </h2>
       <div className='footer__container'>
         <span className='footer__copyright'>&copy; {currentYear}</span>
         <div className='footer__content-socials'>

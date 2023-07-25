@@ -75,6 +75,7 @@
         max-width: 292px;
         width: calc(100% - 14px);
         padding-top: 81px;
+        padding-bottom: 10.03px;
     }
 
     .searchform__input {

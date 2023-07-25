@@ -2,7 +2,7 @@
     margin: 0 0 16px;
     font-weight: 500;
     font-size: 14px;
-    line-height: normal;
+    line-height: 17px;
     font-style: normal;
     width: 396px;
     color: #FFF;
@@ -10,7 +10,7 @@
     border: none;
     border-radius: 3px;
     background: #4285f4;
-    padding: 14px 0 15px;
+    padding: 13px 0 15px;
     cursor: pointer;
   }
 

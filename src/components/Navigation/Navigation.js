@@ -21,25 +21,20 @@ const Navigation = ({ loggedIn }) => {
             <Link to='/signup' className='navigation__link'>
               Регистрация
             </Link>
-            <Link to='signin'>
-              <button className='navigation__button'>Войти</button>
+            <Link
+              to='signin'
+              className='navigation__link navigation__link_active'
+            >
+              Войти
             </Link>
           </div>
         </>
       ) : (
         <div className='navigation__movies'>
-          <NavLink
-            className='navigation__movies-link'
-            activeclassname='navigation__movies-link_active'
-            to='/movies'
-          >
+          <NavLink className='navigation__movies-link' to='/movies'>
             Фильмы
           </NavLink>
-          <NavLink
-            className='navigation__movies-link'
-            activeclassname='navigation__movies-link_active'
-            to='/saved-movies'
-          >
+          <NavLink className='navigation__movies-link' to='/saved-movies'>
             Сохранённые фильмы
           </NavLink>
           <nav className='navigation__account'>

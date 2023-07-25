@@ -88,6 +88,10 @@
         padding-bottom: 70px;
     }
 
+    .portfolio__links {
+        gap: 20px;
+    }
+
     .portfolio__title {
         margin-bottom: 40px;
         font-size: 14px;
