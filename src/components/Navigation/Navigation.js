@@ -14,9 +14,10 @@ const Navigation = ({ loggedIn }) => {
     setIsBurgerMenuOpen(true);
   };
   return (
-    <nav className='navigation'>
+    <>
       {!loggedIn ? (
         <>
+        <nav className='navigation'>
           <div className='navigation__auth'>
             <Link to='/signup' className='navigation__link'>
               Регистрация
@@ -28,8 +29,10 @@ const Navigation = ({ loggedIn }) => {
               Войти
             </Link>
           </div>
+          </nav>
         </>
       ) : (
+        <nav className='navigation'>
         <div className='navigation__movies'>
           <NavLink className='navigation__movies-link' to='/movies'>
             Фильмы
@@ -50,9 +53,10 @@ const Navigation = ({ loggedIn }) => {
             onClick={openPopup}
           />
         </div>
+        </nav>
       )}
       <BurgerMenu isOpen={isBurgerMenuOpen} onClose={closePopups} />
-    </nav>
+    </>
   );
 };
 

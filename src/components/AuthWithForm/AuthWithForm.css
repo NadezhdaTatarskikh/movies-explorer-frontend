@@ -29,10 +29,6 @@
    padding: 15px;
 }
 
-.auth-form__input:last-of-type {
-   color: #EE3465;
-}
-
 .auth-form__input:focus {
    outline: none;
    border: 1px solid #ee3465;
@@ -46,3 +42,23 @@
    color: #EE3465;
    margin-top: 10px;
 }
+
+.auth-form__input:invalid {
+   color: #EE3465;
+}
+
+.auth-form__input:valid {
+   color: #FFF;
+}
+
+
+.auth-form__input:focus:valid {
+   outline: none;
+   border: 1px solid #2F2F2F;
+}
+
+   .auth-form__input:-webkit-autofill,
+   .auth-form__input:-webkit-autofill:active {
+       transition: background-color 5500s ease-in-out 0s;
+       -webkit-text-fill-color: #FFF !important;
+   }

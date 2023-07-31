@@ -1,8 +1,9 @@
 import './ButtonSubmit.css';
 
-const ButtonSubmit = ({ text, isDisabled }) => {
+const ButtonSubmit = ({ text, disabled, ...rest }) => {
+  const buttonClassName =  `${disabled ? 'button button_disabled' : 'button button:hover'}`
   return (
-    <button className='button' type='submit' disabled={isDisabled} text={text}>
+    <button className={buttonClassName} type='submit' text={text} {...rest}>
       {text}
     </button>
   );

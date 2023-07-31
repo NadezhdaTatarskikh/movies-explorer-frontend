@@ -1,19 +1,30 @@
 .form {
    display: flex;
    flex-direction: column;
+   margin: 0;
+   padding: 0;
+}
+.form__container {
+   display: flex;
+   flex-direction: column;
    gap: 10px;
    width: 396px;
    padding-bottom: 69px;
    box-sizing: border-box;
    margin: 0;
 }
-
+.form__error {
+   font-weight: 400;
+   font-size: 10px;
+   line-height: 12px;
+   color:  #8b8b8b;
+}
 .form:focus {
    outline: none;
 }
 
 @media screen and (max-width: 430px) {
-   .form {
+   .form__container {
       width: 260px;
       padding-bottom: 157px;
    }

@@ -1,10 +1,22 @@
 import React from 'react';
 import Auth from '../Auth/Auth';
 import Form from '../Form/Form';
-import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
 import AuthWithForm from '../AuthWithForm/AuthWithForm';
+import { useFormValidation } from '../UseFormValidation/useFormValidation';
 
-const Login = () => {
+const Login = ({ onLogin, errorMessage }) => {
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormValidation();
+
+  const handleSubmit = (evt) => {
+    // Запрещаем браузеру переходить по адресу формы
+    evt.preventDefault();
+    if (!values.password || !values.email) {
+      return;
+    }
+    onLogin(values);
+    resetForm();
+  };
   return (
     <>
       <Auth
@@ -13,29 +25,39 @@ const Login = () => {
         route='/signup'
         link='Регистрация'
       >
-        <Form>
+        <Form
+          onSubmit={handleSubmit}
+          errorMessage={errorMessage || ''}
+          text='Войти'
+          disabled={!isValid}
+        >
           <AuthWithForm
+            id='email'
             label='E-mail'
             name='email'
             type='email'
             placeholder='E-mail'
             minLength='8'
             maxLength='30'
-            error=''
             required
+            value={values.email || ''}
+            error={errors.email || ''}
+            onChange={handleChange}
           />
           <AuthWithForm
+            id='password'
             label='Пароль'
             name='password'
             type='password'
             placeholder='Пароль'
-            error=''
             minLength='8'
             maxLength='30'
             required
+            value={values.password || ''}
+            error={errors.password || ''}
+            onChange={handleChange}
           />
         </Form>
-        <ButtonSubmit text='Войти' />
       </Auth>
     </>
   );

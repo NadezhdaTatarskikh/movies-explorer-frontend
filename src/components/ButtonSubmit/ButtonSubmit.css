@@ -19,9 +19,14 @@
     transition: opacity 0.5s linear;
   }
 
-  .button:disabled {
+  .button_disabled {
     background: #6a6c70;
-    pointer-events: none;
+    
+    cursor: pointer;
+  }
+  .button_disabled:hover {
+    opacity: 0.5;
+    transition: opacity 0.5s linear;
   }
 
   @media screen and (max-width: 430px) {
