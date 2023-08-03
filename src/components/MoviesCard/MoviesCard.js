@@ -2,7 +2,7 @@ import React from 'react';
 import './MoviesCard.css';
 //import Movie from '../../images/poster.png';
 
-const MoviesCard = ({movie}) => {
+const MoviesCard = ({ movie }) => {
   return (
     <li className='movies-card'>
       <img

@@ -36,23 +36,6 @@ function App() {
     handleTokenCheck();
   }, [loggedIn]);
 
-  // получаем список фильмов
-  useEffect(() => {
-    if(loggedIn) {
-      Promise.all([mainApi.getUserInfo(), moviesApi.getAllMovies()])
-      .then(([userInfo, movie]) => {
-        console.log(userInfo)
-        console.log(movie);
-        setCurrentUser(userInfo);
-        setMovies(movie);
-      })
-        .catch((err) => {
-          console.log(`Произошла ошибка: ${err}`);
-        })
-    }
-  }, [loggedIn]);
-  
-
 // обработчик проверки токена пользователя
 const handleTokenCheck = () => {
   const jwt = localStorage.getItem("jwt");
@@ -98,6 +81,9 @@ const handleTokenCheck = () => {
     });
 }
 
+
+
+
 // Авторизация пользователя
 const handleAuthorization = ({ email, password }) => {
   apiAuth.login({ email, password })
@@ -107,6 +93,17 @@ const handleAuthorization = ({ email, password }) => {
         localStorage.setItem('jwt', res.token);
         handleTokenCheck()
         navigate('/movies');
+        Promise.all([mainApi.getUserInfo(res.token), moviesApi.getAllMovies(res.token)])
+    .then(([userInfo, userMovies]) => {
+      console.log(userInfo)
+      console.log(userMovies);
+      setCurrentUser(userInfo);
+      localStorage.setItem('movies', JSON.stringify(userMovies));
+      setMovies(userMovies);
+    })
+      .catch((err) => {
+        console.log(`Произошла ошибка: ${err}`);
+      })
       }
     })
     .catch((err) => {

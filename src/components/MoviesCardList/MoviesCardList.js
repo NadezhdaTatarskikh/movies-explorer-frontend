@@ -2,14 +2,14 @@ import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-const MoviesCardList = ({movies}) => {
+const MoviesCardList = ({ movies }) => {
   
   return (
     <>
        <ul className='cards__list'> 
         {movies && movies.map((movie) => (
         <MoviesCard 
-            key={movie._id || movie.movieId} 
+            key={movie.id || movie.movieId} 
             movie={movie} 
         />
         ))}

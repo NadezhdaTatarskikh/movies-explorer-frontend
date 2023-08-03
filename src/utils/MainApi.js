@@ -1,12 +1,13 @@
 import { checkResponse, BASE_URL } from './Constants';
 
 const headers = {
-  Accept: 'application/json',
+  'Accept': 'application/json',
   'Content-Type': 'application/json',
 };
 
+
 // Получаем информацию о пользователе с сервера
-export const getUserInfo = async (jwt) => {
+export const getUserInfo = (jwt) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
