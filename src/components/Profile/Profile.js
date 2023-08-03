@@ -9,24 +9,25 @@ const Profile = ({
   onUpdateUser,
   loggedIn,
   logOut,
-  isInputDisabled,
-  setIsInputDisabled,
+  setIsEditUserInfoStatus
 }) => {
   const { values, handleChange, errors, isValid, setValues, resetForm } =
     useFormValidation();
   const currentUser = useContext(CurrentUserContext);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isInputDisabled, setIsInputDisabled] = useState(false);
 
   const disableButton = (!isValid ||
     (currentUser.name === values.name && currentUser.email === values.email));
 
   // отображаем текущие данные в инпутах
   useEffect(() => {
+    setIsInputDisabled(false);
     setValues({
       name: currentUser.name,
       email: currentUser.email,
     });
-  }, [currentUser, setValues])
+  }, [currentUser, setValues, setIsInputDisabled])
 
   // Передаём значения управляемых компонентов во внешний обработчик
   function handleSubmit(evt) {
@@ -64,6 +65,7 @@ const Profile = ({
               id="profile__name"
               type="text"
               name="name"
+               placeholder='Введите имя'
               required
               minLength="2"
               maxLength="30"
@@ -91,7 +93,7 @@ const Profile = ({
           </div>
           <span className="profile__input-error">{errors.email || ""}</span>
           {isSuccess && (
-            <p className="profile__form-status">{setIsInputDisabled}</p>
+            <p className="profile__form-status">{setIsEditUserInfoStatus}</p>
           )}
           <div className="profile__button-container">
             {!isInputDisabled ? (

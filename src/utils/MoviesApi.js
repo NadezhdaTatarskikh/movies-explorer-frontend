@@ -1,14 +1,13 @@
 import { checkResponse, MOVIE_URL } from './Constants';
 
-class MoviesApi {
-  constructor(movieUrl) {
-    this._movieUrl = movieUrl;
-  }
-  getMovies() {
-    return fetch(this._movieUrl).then((res) => checkResponse(res));
-  }
+  // функция получения фильмов с сервера BeatfilmMoviesApi
+ 
+export const getAllMovies = () => {
+  return fetch(`${MOVIE_URL}`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+    }
+  })
+  .then((res) => checkResponse(res));
 }
-
-const moviesApi = new MoviesApi(MOVIE_URL);
-
-export default moviesApi;

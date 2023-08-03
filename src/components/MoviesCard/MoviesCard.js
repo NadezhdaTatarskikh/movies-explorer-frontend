@@ -1,20 +1,18 @@
 import React from 'react';
 import './MoviesCard.css';
-import Movie from '../../images/poster.png';
+//import Movie from '../../images/poster.png';
 
-const MoviesCard = () => {
+const MoviesCard = ({movie}) => {
   return (
     <li className='movies-card'>
       <img
         className='movies-card__image'
-        src={Movie}
-        alt={`Кадр из фильма ${'33 слова о дизайне'}`}
-      />
+        src={`https://api.nomoreparties.co/${movie.image.url}`} alt={`постер к фильму ${movie.name.RU || movie.name.EN}`}/>
       <div className='movies-card__description'>
-        <h2 className='movies-card__name'>В погоне за Бенкси</h2>
+        <h2 className='movies-card__name'>{movie.name.RU || movie.name.EN}</h2>
         <button className='movies-card__button' type='button'></button>
       </div>
-      <p className='movies-card__duration'>1ч 42м</p>
+      <p className='movies-card__duration'>{movie.duration}</p>
     </li>
   );
 };

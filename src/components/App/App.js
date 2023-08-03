@@ -12,27 +12,23 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import * as apiAuth from '../../utils/apiAuth';
-//import moviesApi from '../../utils/MoviesApi'
+import * as moviesApi from "../../utils/MoviesApi";
 
 function App() {
  /**переменные состояния пользователя*/
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
-  const [isInputDisabled, setIsInputDisabled] = useState(false);
   const [isEditUserInfoStatus, setIsEditUserInfoStatus] = useState('');
   
- 
-
-
   //* Переменные состояния ошибок 
   // eslint-disable-next-line no-unused-vars
   const [errorMessage, setErrorMessage] = useState();
-  //const [isNotFound, setIsNotFound] = useState(false);
-
-  //* Переменные состояния загрузоки
-  //const [isRenderLoading, setIsRenderLoading] = useState(false);
+ 
+  // Переменные состояния по фильмам
+  const [movies, setMovies] = useState([]); // Данные всех фильмов 
   
-
+  const [savedMovies, setSavedMovies] = useState([]); // Сохраненные фильмы
+  
   //добавили хук истории
   const navigate = useNavigate();
 
@@ -40,8 +36,24 @@ function App() {
     handleTokenCheck();
   }, [loggedIn]);
 
+  // получаем список фильмов
+  useEffect(() => {
+    if(loggedIn) {
+      Promise.all([mainApi.getUserInfo(), moviesApi.getAllMovies()])
+      .then(([userInfo, movie]) => {
+        console.log(userInfo)
+        console.log(movie);
+        setCurrentUser(userInfo);
+        setMovies(movie);
+      })
+        .catch((err) => {
+          console.log(`Произошла ошибка: ${err}`);
+        })
+    }
+  }, [loggedIn]);
+  
 
-// Проверка токена пользователя
+// обработчик проверки токена пользователя
 const handleTokenCheck = () => {
   const jwt = localStorage.getItem("jwt");
   if (!jwt) {
@@ -52,6 +64,15 @@ const handleTokenCheck = () => {
   .then((data)=> {
     setCurrentUser(data)
     setLoggedIn(true);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  mainApi
+  .getSavedMovies(jwt)
+  .then((data) => {
+    setLoggedIn(true);
+    setSavedMovies(data)
   })
   .catch((err) => {
     console.log(err);
@@ -105,18 +126,19 @@ const handleAuthorization = ({ email, password }) => {
 
 /**Изменяем данные пользователя*/
 const handleUpdateUser = (data) => {
+  setIsEditUserInfoStatus(true)
   const jwt = localStorage.getItem("jwt");
   mainApi.editUserInfo(data, jwt)
-    .then((res) => {
-      setCurrentUser(res.data)
-      setIsInputDisabled('Данные успешно обновлены!')
+    .then(() => {
+      setCurrentUser(data)
+      setIsEditUserInfoStatus('Данные успешно обновлены!')
     })
     .catch((err) => {
       console.log(err)
       if (err === 'Ошибка: 409') {
-      setErrorMessage('Пользователь с таким email уже зарегистрирован')
+        setIsEditUserInfoStatus('Пользователь с таким email уже зарегистрирован')
         } else {
-          setErrorMessage('При обновлении профиля произошла ошибка');
+          setIsEditUserInfoStatus('При обновлении профиля произошла ошибка');
         }
       })
       .finally(() => setIsEditUserInfoStatus(false)
@@ -128,8 +150,12 @@ const handleUpdateUser = (data) => {
     localStorage.clear()
     setLoggedIn(false);
     navigate('/');
+    setSavedMovies([])
+    //setInitialMovies([]);
   };
- console.log(currentUser)
+
+  
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -137,12 +163,19 @@ const handleUpdateUser = (data) => {
           <Route path="/" element={<Main loggedIn={loggedIn} />} />
           <Route
             path="/movies"
-            element={<ProtectedRoute element={Movies} loggedIn={loggedIn} />}
+            element={<ProtectedRoute 
+              element={Movies} 
+              loggedIn={loggedIn}
+              SavedMovies={savedMovies}
+              movies={movies} />}
           />
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />
+              <ProtectedRoute 
+              element={SavedMovies} 
+              loggedIn={loggedIn} 
+              SavedMovies={savedMovies}/>
             }
           />
           <Route
@@ -152,8 +185,6 @@ const handleUpdateUser = (data) => {
               loggedIn={loggedIn} 
               onUpdateUser={handleUpdateUser} 
               logOut={handleLogOut} 
-              isInputDisabled={isInputDisabled}
-              setIsInputDisabled={setIsInputDisabled}
               setErrorMessage={setErrorMessage}
               isEditUserInfoStatus={isEditUserInfoStatus}
               />}
