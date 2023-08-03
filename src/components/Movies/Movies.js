@@ -5,7 +5,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-const Movies = ({ loggedIn, onSubmit, isLoading, savedMovies }) => {
+const Movies = ({ loggedIn, onSubmit, isLoading, movies }) => {
   return (
     <>
       <Header loggedIn={loggedIn} />
@@ -17,7 +17,7 @@ const Movies = ({ loggedIn, onSubmit, isLoading, savedMovies }) => {
           <Preloader />
         ) : (
         <MoviesCardList 
-        savedMovies={savedMovies}
+        movies={movies}
         />
         )}
         <button className='movies__button' type='button'>
