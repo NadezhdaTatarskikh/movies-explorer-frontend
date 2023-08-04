@@ -2,7 +2,7 @@ import React from 'react';
 import Auth from '../Auth/Auth';
 import AuthWithForm from '../AuthWithForm/AuthWithForm';
 import Form from '../Form/Form';
-import { useFormValidation } from '../UseFormValidation/useFormValidation';
+import { useFormValidation } from '../hooks/useFormValidation';
 
 const Register = ({ onRegister, errorMessage }) => {
   const { values, handleChange, errors, isValid, resetForm } =

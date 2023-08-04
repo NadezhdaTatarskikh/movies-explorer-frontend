@@ -7,7 +7,6 @@
   gap: 37px 24px;
 }
 
-
 @media screen and (max-width: 1150px) {
   .cards__list {
     max-width: 708px;

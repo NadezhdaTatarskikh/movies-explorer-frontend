@@ -3,18 +3,21 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
 const MoviesCardList = ({ movies }) => {
+
+
+  
   
   return (
-    <>
+    <section className='cards'>
        <ul className='cards__list'> 
-        {movies && movies.map((movie) => (
+        {movies.map((movie) => (
         <MoviesCard 
             key={movie.id || movie.movieId} 
             movie={movie} 
         />
         ))}
       </ul>
-    </>
+    </section>
   );
 };
 

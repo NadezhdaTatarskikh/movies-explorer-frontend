@@ -81,7 +81,21 @@ const handleTokenCheck = () => {
     });
 }
 
-
+useEffect(() => {
+  if(loggedIn) {
+    Promise.all([mainApi.getUserInfo(), moviesApi.getAllMovies()])
+    .then(([userInfo, userMovies]) => {
+      console.log(userInfo)
+      console.log(userMovies);
+      setCurrentUser(userInfo);
+      localStorage.setItem('movies', JSON.stringify(userMovies));
+      setMovies(JSON.parse(localStorage.getItem('movies')));
+    })
+      .catch((err) => {
+        console.log(`Произошла ошибка: ${err}`);
+      })
+  }
+}, [loggedIn]);
 
 
 // Авторизация пользователя
@@ -93,17 +107,6 @@ const handleAuthorization = ({ email, password }) => {
         localStorage.setItem('jwt', res.token);
         handleTokenCheck()
         navigate('/movies');
-        Promise.all([mainApi.getUserInfo(res.token), moviesApi.getAllMovies(res.token)])
-    .then(([userInfo, userMovies]) => {
-      console.log(userInfo)
-      console.log(userMovies);
-      setCurrentUser(userInfo);
-      localStorage.setItem('movies', JSON.stringify(userMovies));
-      setMovies(userMovies);
-    })
-      .catch((err) => {
-        console.log(`Произошла ошибка: ${err}`);
-      })
       }
     })
     .catch((err) => {
@@ -146,8 +149,11 @@ const handleUpdateUser = (data) => {
   const handleLogOut = () => {
     localStorage.clear()
     setLoggedIn(false);
-    navigate('/');
     setSavedMovies([])
+
+    //Делаем переадресацию на главную страницу
+    navigate('/');
+   
     //setInitialMovies([]);
   };
 

@@ -3,14 +3,14 @@ import { isEmail } from 'validator';
 
 //хук управления формой и валидации формы
 export const useFormValidation = () => {
-  const [values, setValues] = useState({});
-  const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(false);
+  const [values, setValues] = useState({}); // // Введённые значения
+  const [errors, setErrors] = useState({}); // Переменная состояния ошибки
+  const [isValid, setIsValid] = useState(false); // Переменная состония поля input (валидность)
 
+  // обработчик вводимых данных
   const handleChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
+      const name = event.target.name;
+      const value = event.target.value;
 
     if (name === 'email') {
       const emailError = !isEmail(value)
@@ -18,13 +18,14 @@ export const useFormValidation = () => {
         : '';
       setErrors({ ...errors, [name]: emailError });
     } else {
-      setErrors({ ...errors, [name]: target.validationMessage });
+      setErrors({ ...errors, [name]: event.target.validationMessage });
     }
 
-    setIsValid(target.closest('form').checkValidity());
-    setValues({ ...values, [name]: value });
+    setIsValid(event.target.closest('form').checkValidity());  
+    setValues({ ...values, [name]: value });  
   };
 
+  // обработчик очистки формы
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
       setValues(newValues);
@@ -34,5 +35,6 @@ export const useFormValidation = () => {
     [setValues, setErrors, setIsValid]
   );
 
+  // возвращаем обработчики и стейты
   return { values, handleChange, errors, isValid, resetForm, setValues };
 };

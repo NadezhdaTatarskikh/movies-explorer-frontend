@@ -7,9 +7,9 @@ const MoviesCard = ({ movie }) => {
     <li className='movies-card'>
       <img
         className='movies-card__image'
-        src={`https://api.nomoreparties.co/${movie.image.url}`} alt={`постер к фильму ${movie.name.RU || movie.name.EN}`}/>
+        src={`https://api.nomoreparties.co/${movie.image.url}`} alt={`постер к фильму ${movie.nameRU || movie.nameEN}`}/>
       <div className='movies-card__description'>
-        <h2 className='movies-card__name'>{movie.name.RU || movie.name.EN}</h2>
+        <h2 className='movies-card__name'>{movie.nameRU || movie.nameEN}</h2>
         <button className='movies-card__button' type='button'></button>
       </div>
       <p className='movies-card__duration'>{movie.duration}</p>

@@ -2,7 +2,7 @@ import React from 'react';
 import Auth from '../Auth/Auth';
 import Form from '../Form/Form';
 import AuthWithForm from '../AuthWithForm/AuthWithForm';
-import { useFormValidation } from '../UseFormValidation/useFormValidation';
+import { useFormValidation } from '../hooks/useFormValidation';
 
 const Login = ({ onLogin, errorMessage }) => {
   const { values, handleChange, errors, isValid, resetForm } =

@@ -5,13 +5,14 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-const Movies = ({ loggedIn, onSubmit, isLoading, movies }) => {
+const Movies = ({ loggedIn, onSubmit, isLoading, movies, searchKeyword, }) => {
   return (
     <>
       <Header loggedIn={loggedIn} />
       <main className='movies'>
         <SearchForm 
         onSubmit={onSubmit}
+        defaultValue={searchKeyword}
         />
         {isLoading ? ( 
           <Preloader />
