@@ -29,6 +29,15 @@ function App() {
   const [movies, setMovies] = useState([]); // Данные всех фильмов 
   
   const [savedMovies, setSavedMovies] = useState([]); // Сохраненные фильмы
+
+ //* Переменные состояния для формы поиска фильмов
+ //const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
+ //const [searchKeyword, setSearchKeyword] = useState('') // Ключевое слово
+ //const [checkboxSavedMovies, setCheckboxSavedMovies] = useState(false);
+
+
+ 
+
   
   //добавили хук истории
   const navigate = useNavigate();
@@ -82,23 +91,6 @@ const handleTokenCheck = () => {
     });
 }
 
-useEffect(() => {
-  if(loggedIn) {
-    Promise.all([mainApi.getUserInfo(), moviesApi.getAllMovies()])
-    .then(([userInfo, userMovies]) => {
-      console.log(userInfo)
-      console.log(userMovies);
-      setCurrentUser(userInfo);
-      localStorage.setItem('movies', JSON.stringify(userMovies));
-      setMovies(JSON.parse(localStorage.getItem('movies')));
-    })
-      .catch((err) => {
-        console.log(`Произошла ошибка: ${err}`);
-      })
-  }
-}, [loggedIn]);
-
-
 // Авторизация пользователя
 const handleAuthorization = ({ email, password }) => {
   apiAuth.login({ email, password })
@@ -124,6 +116,24 @@ const handleAuthorization = ({ email, password }) => {
       setTimeout(() => setErrorMessage(''), 3000);
     });
 }
+
+useEffect(() => {
+  if(loggedIn) {
+    Promise.all([mainApi.getUserInfo(), moviesApi.getAllMovies()])
+    .then(([userInfo, userMovies]) => {
+      console.log(userInfo)
+      console.log(userMovies);
+      setCurrentUser(userInfo);
+      localStorage.setItem('movies', JSON.stringify(userMovies));
+      setMovies(JSON.parse(localStorage.getItem('movies')));
+    })
+      .catch((err) => {
+        console.log(`Произошла ошибка: ${err}`);
+      })
+  }
+}, [loggedIn]);
+
+
 
 /**Изменяем данные пользователя*/
 const handleUpdateUser = (data) => {
@@ -175,7 +185,8 @@ const handleUpdateUser = (data) => {
               element={Movies} 
               loggedIn={loggedIn}
               SavedMovies={savedMovies}
-              movies={movies} />}
+              movies={movies} 
+              />}
           />
           <Route
             path="/saved-movies"

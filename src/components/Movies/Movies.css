@@ -34,11 +34,10 @@
    }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 428px) {
    .movies {
-        margin: 0 10px;
         max-width: 320px;
-        width: 100% ;
+        width: calc(100% - 20px);
    }
 
 }

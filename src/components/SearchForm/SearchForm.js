@@ -14,7 +14,7 @@ useEffect(() => {
 }, [defaultValue]);
 
   // обработчик вводимых данных
-  const onChange = (evt) => {
+  const handleFormChange = (evt) => {
     setKeyword(evt.target.value);
     handleChange(evt)
    }
@@ -29,7 +29,7 @@ useEffect(() => {
   };
 
   return (
-    <form className='searchform' noValidate onSubmit={handleFormSubmit}>
+    <form className='searchform' onSubmit={handleFormSubmit} noValidate>
       <div className='searchform__input-container'>
         <input
           className='searchform__input'
@@ -41,7 +41,7 @@ useEffect(() => {
           minLength='1'
           maxLength='20'
           value={keyword || ''}
-          onChange={onChange}
+          onChange={handleFormChange}
         ></input>
         <button className='searchform__button' type='submit'>
           Найти
