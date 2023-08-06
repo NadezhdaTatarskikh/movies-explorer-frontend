@@ -17,10 +17,12 @@ const Movies = ({
   setMoviesList,
   numberAddMovies,
 }) => {
+   
   // обработчик нажатий на кнопку 'Ещё'
-  function handleMoreButtonClick() {
-    setMoviesList(moviesList.slise(0, numberAddMovies));
+  const handleButtonClick = () => {
+    setMoviesList(moviesList + numberAddMovies);
   }
+  
   return (
     <>
       <Header loggedIn={loggedIn} />
@@ -33,15 +35,13 @@ const Movies = ({
         />
 
         {preloader ? <Preloader /> : <MoviesCardList movies={movies} />}
-        {!(movies.length <= moviesList) && (
           <button
-            className='movies__button'
+          className='movies__button'
             type='button'
-            onClick={handleMoreButtonClick}
+            onClick={handleButtonClick}
           >
             Ещё
           </button>
-        )}
       </main>
       <Footer />
     </>

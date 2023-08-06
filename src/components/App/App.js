@@ -37,7 +37,6 @@ function App() {
 
 
  
-
   
   //добавили хук истории
   const navigate = useNavigate();
