@@ -4,25 +4,23 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useFormValidation } from '../../hooks/useFormValidation';
 
 const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue }) => {
-  const [keyword, setKeyword] = useState(''); // ВВедёные значения по ключевому слову
   const [errorText, setErrorText] = useState(''); // Переменная состояния ошибки
-  const {values, handleChange} = useFormValidation();
+  const [keyword, setKeyword] = useState(''); // ВВедёные значения по ключевому слову
+  const {isValid, handleChange} = useFormValidation();
 
-   // Эффект отслеживания состояния поля input поиска
-   useEffect(() => {
-    setKeyword(defaultValue);
-  }, [defaultValue]);
+// Эффект отслеживания состояния поля input поиска
+useEffect(() => {
+  setKeyword(defaultValue);
+}, [defaultValue]);
 
   // обработчик вводимых данных
   const onChange = (evt) => {
     setKeyword(evt.target.value);
     handleChange(evt)
    }
-
-   // обработчик сабмита формы
+  // обработчик сабмита формы
   const handleFormSubmit = (evt) => {
     evt.preventDefault(); // отменяем действие по умолчанию
-    const isValid = evt.target.closest('form').checkValidity();
     if (!isValid) {
       setErrorText('Введите ключевое слово');
       return;
@@ -42,14 +40,14 @@ const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue }) => {
           required
           minLength='1'
           maxLength='20'
-          value={keyword || values}
+          value={keyword || ''}
           onChange={onChange}
         ></input>
-        <button className='searchform__button' type='submit' >
+        <button className='searchform__button' type='submit'>
           Найти
         </button>
       </div>
-      <span className='searchform__error'>{errorText}</span>
+      <span className='searchform__error'>{!isValid && errorText}</span>
       <FilterCheckbox onCheckbox={onCheckbox} checked={checked} />
     </form>
   );

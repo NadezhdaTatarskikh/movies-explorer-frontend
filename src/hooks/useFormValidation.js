@@ -8,9 +8,9 @@ export const useFormValidation = () => {
   const [isValid, setIsValid] = useState(false); // Переменная состония поля input (валидность)
 
   // обработчик вводимых данных
-  const handleChange = (event) => {
-      const name = event.target.name;
-      const value = event.target.value;
+  const handleChange = (evt) => {
+      const name = evt.target.name;
+      const value = evt.target.value;
 
     if (name === 'email') {
       const emailError = !isEmail(value)
@@ -18,10 +18,10 @@ export const useFormValidation = () => {
         : '';
       setErrors({ ...errors, [name]: emailError });
     } else {
-      setErrors({ ...errors, [name]: event.target.validationMessage });
+      setErrors({ ...errors, [name]: evt.target.validationMessage });
     }
 
-    setIsValid(event.target.closest('form').checkValidity());  
+    setIsValid(evt.target.closest('form').checkValidity());  
     setValues({ ...values, [name]: value });  
   };
 
