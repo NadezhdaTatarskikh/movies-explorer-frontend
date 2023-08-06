@@ -1,5 +1,6 @@
-// функция преобразования длительности фильмов
+import { SHORT_MOVIES } from '../utils/Constants';
 
+// функция преобразования длительности фильмов
 export const convertMinToHours = (number) => {
     const minutes = number % 60;
     const hours = (number - minutes) / 60;
@@ -11,3 +12,13 @@ export const convertMinToHours = (number) => {
     return `${hours}ч ${minutes}м`;
   }
 };
+
+// фильтрация по длительности фильма
+export const filterShortMovies = (movies) => {
+  return movies.filter(movie => movie.duration < SHORT_MOVIES);
+}
+
+
+ 
+
+

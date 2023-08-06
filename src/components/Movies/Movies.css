@@ -28,19 +28,17 @@
    opacity: 0.5;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 520px) {
    .movies {
       width: calc(100% - 60px);
    }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 400px) {
    .movies {
-      width: 320px;
+        margin: 0 10px;
+        max-width: 320px;
+        width: 100% ;
    }
 
-   .movies__button {
-      margin-left: 10px;
-      margin-right: 10px;
-   }
 }

@@ -47,7 +47,7 @@ export const getSavedMovies = (jwt) => {
 };
 
 // Cохраняем фильмы пользователя
-export const saveMovie = (movie, jwt) => {
+export const newMoviees = (movie, jwt) => {
   return fetch(`${BASE_URL}/movies`, {
       method: 'POST',
       headers: {
@@ -62,7 +62,7 @@ export const saveMovie = (movie, jwt) => {
           description: movie.description,
           image: `https://api.nomoreparties.co/${movie.image.url}`,
           trailerLink: movie.trailerLink,
-          thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.urlЪ}`,
+          thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
           movieId: movie.id,
           nameRU: movie.nameRU || 'нет данных',
           nameEN: movie.nameEN || 'нет данных',

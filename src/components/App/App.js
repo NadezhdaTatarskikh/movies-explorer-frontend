@@ -13,6 +13,7 @@ import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import * as apiAuth from '../../utils/apiAuth';
 import * as moviesApi from "../../utils/MoviesApi";
+//import { SHORT_MOVIES } from '../../utils/Constants';
 
 function App() {
  /**переменные состояния пользователя*/
@@ -144,6 +145,10 @@ const handleUpdateUser = (data) => {
       .finally(() => setIsEditUserInfoStatus(false)
       );
 }
+
+
+
+
 
 // Выйти из аккаунта
   const handleLogOut = () => {

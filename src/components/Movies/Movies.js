@@ -5,25 +5,43 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-const Movies = ({ loggedIn, onSubmit, isLoading, movies, searchKeyword, }) => {
+const Movies = ({
+  loggedIn,
+  onSubmit,
+  preloader,
+  movies,
+  searchKeyword,
+  onCheckbox,
+  checked,
+  moviesList,
+  setMoviesList,
+  numberAddMovies,
+}) => {
+  // обработчик нажатий на кнопку 'Ещё'
+  function handleMoreButtonClick() {
+    setMoviesList(moviesList.slise(0, numberAddMovies));
+  }
   return (
     <>
       <Header loggedIn={loggedIn} />
       <main className='movies'>
-        <SearchForm 
-        onSubmit={onSubmit}
-        defaultValue={searchKeyword}
+        <SearchForm
+          onSubmit={onSubmit}
+          onCheckbox={onCheckbox}
+          checked={checked}
+          defaultValue={searchKeyword}
         />
-        {isLoading ? ( 
-          <Preloader />
-        ) : (
-        <MoviesCardList 
-        movies={movies}
-        />
+
+        {preloader ? <Preloader /> : <MoviesCardList movies={movies} />}
+        {!(movies.length <= moviesList) && (
+          <button
+            className='movies__button'
+            type='button'
+            onClick={handleMoreButtonClick}
+          >
+            Ещё
+          </button>
         )}
-        <button className='movies__button' type='button'>
-          Ещё
-        </button>
       </main>
       <Footer />
     </>

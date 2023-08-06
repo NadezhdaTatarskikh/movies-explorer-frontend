@@ -19,9 +19,8 @@ export const SHORT_MOVIES = 40;
 export const NUMBER_CARDS_12 = 12;
 export const NUMBER_CARDS_8 = 8;
 export const NUMBER_CARDS_6 = 6;
-export const NUMBER_CARDS_5 = 5;
 
-// Переменные сколько будет добавлено фильмов, зависит от ширины экрана
+// количество карточек, открывающихся при нажатиии кнопки "ещё"
 export const NUMBER_ADDED_CARDS_3 = 3;
 export const NUMBER_ADDED_CARDS_2 = 2;
 export const NUMBER_ADDED_CARDS_1 = 1;

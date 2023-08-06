@@ -2,9 +2,14 @@ import { useEffect, useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue }) => {
+const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue, disabled }) => {
   const [errorText, setErrorText] = useState(''); // Переменная состояния ошибки
   const [keyword, setKeyword] = useState(''); // ВВедёные значения по ключевому слову
+
+   // Эффект отслеживания состояния поля input поиска
+   useEffect(() => {
+    setKeyword(defaultValue);
+  }, [defaultValue]);
 
   // обработчик вводимых данных
   const handleChangeKeyword = (evt) => {
@@ -25,11 +30,6 @@ const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue }) => {
     onSubmit(keyword);
   };
 
-  // Эффект отслеживания состояния поля input поиска
-  useEffect(() => {
-    setKeyword(defaultValue);
-  }, [defaultValue]);
-
   return (
     <form className='searchform' noValidate onSubmit={handleFormSubmit}>
       <div className='searchform__input-container'>
@@ -45,7 +45,7 @@ const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue }) => {
           value={keyword || ''}
           onChange={handleChangeKeyword}
         ></input>
-        <button className='searchform__button' type='submit'>
+        <button className='searchform__button' type='submit' disabled={disabled} >
           Найти
         </button>
       </div>
