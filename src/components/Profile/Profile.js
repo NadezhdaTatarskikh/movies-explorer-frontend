@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import ButtonSubmit from "../ButtonSubmit/ButtonSubmit";
-import { useFormValidation } from "../hooks/useFormValidation";
+import { useFormValidation } from "../../hooks/useFormValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const Profile = ({

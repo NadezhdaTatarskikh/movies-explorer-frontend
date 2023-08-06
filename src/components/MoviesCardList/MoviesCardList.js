@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
-import { useScreenWidth } from '../hooks/useScreenWidth';
+import { useScreenWidth } from '../../hooks/useScreenWidth';
 import {
   MAX_WINDOW_SIZE,
   MEDIUM_WINDOW_SIZE,
