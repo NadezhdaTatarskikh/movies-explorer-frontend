@@ -17,6 +17,11 @@
    width: 100%;
    height: 100%;
    cursor: pointer;
+   transition: scale 0.9s ease;
+}
+
+.movies-card__image:hover {
+    scale: 1.03;
 }
 
 .movies-card__description {
@@ -90,6 +95,7 @@
    .movies-card__button {
       margin-right: 14px;
       margin-top: 8px;
+      
    }
 
    .movies-card__duration {

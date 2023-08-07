@@ -31,19 +31,19 @@ const Movies = ({
   const screenwidth = useScreenWidth(); // получаем значение ширины экрана 
   const [numberAddMovies, setNumberAddMovies] = useState(0); // число добавляемых карточек, при нажатии на кнопку ещё
   // eslint-disable-next-line no-unused-vars
-  const [moviesList, setMoviesList] = useState(0); // стейт показываемых на странице карточек
+  const [moviesList, setMoviesList] = useState({}); // стейт показываемых на странице карточек
 
   // эффект, устанавливаем кол-во карточек в зависимости от ширины карточек
   useEffect(() => {
-    if (screenwidth >= SCREEN_XL) {
+    if (screenwidth > SCREEN_XL) {
       setMoviesList(NUMBER_CARDS_12);
-      numberAddMovies(NUMBER_ADDED_CARDS_3);
+      setNumberAddMovies(NUMBER_ADDED_CARDS_3);
     } 
-    if (screenwidth< SCREEN_LG && screenwidth >= SCREEN_MD) {
+    if (screenwidth < SCREEN_LG && screenwidth >= SCREEN_MD) {
       setMoviesList(NUMBER_CARDS_8);
       setNumberAddMovies(NUMBER_ADDED_CARDS_2);
     }
-    if (screenwidth< SCREEN_XS) {
+    if (screenwidth < SCREEN_XS) {
       setMoviesList(NUMBER_CARDS_5);
       setNumberAddMovies(NUMBER_ADDED_CARDS_2);
     }

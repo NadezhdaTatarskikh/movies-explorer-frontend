@@ -14,6 +14,9 @@ import NotFound from "../NotFound/NotFound";
 import * as apiAuth from '../../utils/apiAuth';
 import * as moviesApi from "../../utils/MoviesApi";
 //import { SHORT_MOVIES } from '../../utils/Constants';
+//import { getAllMovies } from "../../utils/MoviesApi";
+//import Preloader from '../Preloader/Preloader';
+//import { BASE_URL } from "../../utils/Constants";
 
 
 function App() {
@@ -36,11 +39,10 @@ function App() {
  //const [searchKeyword, setSearchKeyword] = useState('') // Ключевое слово
  //const [checkboxSavedMovies, setCheckboxSavedMovies] = useState(false);
 
-
+//добавили хук истории
+const navigate = useNavigate();
  
   
-  //добавили хук истории
-  const navigate = useNavigate();
 
   useEffect(() => {
     handleTokenCheck();
