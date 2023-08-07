@@ -12,10 +12,10 @@ import {
   NUMBER_CARDS_5,
   NUMBER_ADDED_CARDS_3,
   NUMBER_ADDED_CARDS_2,
-  NUMBER_ADDED_CARDS_1,
-  SCREEN_SM,
   SCREEN_MD,
   SCREEN_XL,
+  SCREEN_XS,
+  SCREEN_LG
 } from '../../utils/Constants';
 
 const Movies = ({
@@ -28,35 +28,35 @@ const Movies = ({
   checked
 }) => {
 
-  const width = useScreenWidth(); // получаем значение ширины экрана// получаем значения ширины экрана
-
+  const screenwidth = useScreenWidth(); // получаем значение ширины экрана 
   const [numberAddMovies, setNumberAddMovies] = useState(0); // число добавляемых карточек, при нажатии на кнопку ещё
   // eslint-disable-next-line no-unused-vars
-  const [moviesList, setMoviesList] = useState(5); // стейт показываемых на странице карточек
-
+  const [moviesList, setMoviesList] = useState(0); // стейт показываемых на странице карточек
 
   // эффект, устанавливаем кол-во карточек в зависимости от ширины карточек
   useEffect(() => {
-    if (width >= SCREEN_XL) {
+    if (screenwidth >= SCREEN_XL) {
       setMoviesList(NUMBER_CARDS_12);
       numberAddMovies(NUMBER_ADDED_CARDS_3);
     } 
-    else if (width > SCREEN_MD && width < SCREEN_XL) {
+    if (screenwidth< SCREEN_LG && screenwidth >= SCREEN_MD) {
       setMoviesList(NUMBER_CARDS_8);
       setNumberAddMovies(NUMBER_ADDED_CARDS_2);
     }
-    else if (width <= SCREEN_SM) {
+    if (screenwidth< SCREEN_XS) {
       setMoviesList(NUMBER_CARDS_5);
-      setNumberAddMovies(NUMBER_ADDED_CARDS_1);
+      setNumberAddMovies(NUMBER_ADDED_CARDS_2);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [width]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenwidth]);
 
-   // обработчик нажатий на кнопку 'Ещё'
+  
+  // обработчик нажатий на кнопку 'Ещё'
   const handleButtonClick = () => {
     setMoviesList(moviesList + numberAddMovies);
   }
-  
+
+
   return (
     <>
       <Header loggedIn={loggedIn} />
@@ -68,7 +68,8 @@ const Movies = ({
           defaultValue={searchKeyword}
         />
 
-        {preloader ? <Preloader /> : <MoviesCardList movies={movies} />}
+
+        {preloader ? <Preloader /> : <MoviesCardList movies={movies.slice(0, moviesList)} />}
           <button
           className='movies__button'
             type='button'

@@ -27,8 +27,7 @@ export const NUMBER_ADDED_CARDS_2 = 2;
 export const NUMBER_ADDED_CARDS_1 = 1;
 
 // Переменные ширины экрана
-export const SCREEN_SM = 576;
-export const SCREEN_MD = 768;
-export const SCREEN_LG = 992;
-export const SCREEN_XL = 1200;
-export const SCREEN_XXL = 1400;
+export const SCREEN_XS = 480;
+export const SCREEN_MD = 560;
+export const SCREEN_LG = 1150;
+export const SCREEN_XL = 1280;
