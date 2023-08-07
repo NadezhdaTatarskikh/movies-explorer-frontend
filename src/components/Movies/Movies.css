@@ -6,7 +6,6 @@
    max-width: 1140px;
    width: calc(100% - 140px);
 }
-
 .movies__button {
    box-sizing: border-box;
    margin: 50px 0 80px;

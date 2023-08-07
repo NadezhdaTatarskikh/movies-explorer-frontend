@@ -21,14 +21,14 @@ export const NUMBER_CARDS_8 = 8;
 export const NUMBER_CARDS_6 = 6;
 export const NUMBER_CARDS_5 = 5;
 
-
-
 // количество карточек, открывающихся при нажатиии кнопки "ещё"
 export const NUMBER_ADDED_CARDS_3 = 3;
 export const NUMBER_ADDED_CARDS_2 = 2;
 export const NUMBER_ADDED_CARDS_1 = 1;
 
 // Переменные ширины экрана
-export const WINDOW_SIZE_1280 = 1280;
-export const WINDOW_SIZE_768 = 768;
-export const WINDOW_SIZE_468 = 468;
+export const SCREEN_SM = 576;
+export const SCREEN_MD = 768;
+export const SCREEN_LG = 992;
+export const SCREEN_XL = 1200;
+export const SCREEN_XXL = 1400;

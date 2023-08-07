@@ -1,26 +1,32 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  SCREEN_SM,
+  SCREEN_MD,
+  SCREEN_LG,
+  SCREEN_XL,
+  SCREEN_XXL,
+} from '../utils/Constants'
 
 // функция установки ширины экрана
 export const useScreenWidth = () => {
   // eslint-disable-next-line no-restricted-globals
-  const getScreenWidth = useCallback(() => screen.innerWidth, []); // получаем ширину экрана
-  const [screenWidth, setScreenWidth] = useState(getScreenWidth()); // устанавливаем стейт screenWidth
+  const [width, setWidth] = useState(window.innerWidth); // устанавливаем стейт screenWidth
 
   useEffect(() => {
-
     // обработчик изменения размера экрана
-    const handleScreenResize = () => { 
-      setScreenWidth(getScreenWidth());
-      window.addEventListener('resize', resizeController, false); // при монтировании ставим обработчик изменения размера окна
+    const handleScreenResize = (event) => { 
+      setWidth(event.target.window.innerWidth);
     };
-
-    let timer;
-
-    const resizeController = () => {
-        if (!timer) { timer = setTimeout(() => { timer = null; handleScreenResize(); }, 1000); // 1 кадр в секунду
-      };
-        return () => window.removeEventListener('resize', handleScreenResize) // удаляем слушатель
+      window.addEventListener('resize', handleScreenResize); // при монтировании ставим обработчик изменения размера окна
+        return () => {window.removeEventListener('resize', handleScreenResize) // удаляем слушатель
     }
-}, [getScreenWidth]);
-return screenWidth;
-}
+  }, [width]);
+return {
+  width,
+  isScreenSm: width >= SCREEN_SM,
+  isScreenMd: width >= SCREEN_MD,
+  isScreenLg: width >= SCREEN_LG,
+  isScreenXl: width >= SCREEN_XL,
+  isScreenXxl: width >= SCREEN_XXL,
+}; 
+};
