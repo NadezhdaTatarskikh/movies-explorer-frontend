@@ -74,7 +74,7 @@ const Profile = ({
               onChange={handleChange}
             />
           </div>
-          <span className="profile__input-error">{errors.name || ""}</span>
+          <span className="profile__form-error">{errors.name || ""}</span>
           <div className="profile__line"></div>
           <div className="profile__data">
             <label className="profile__label" htmlFor="email">
@@ -91,7 +91,7 @@ const Profile = ({
               onChange={handleChange}
             />
           </div>
-          <span className="profile__input-error">{errors.email || ""}</span>
+          <span className="profile__form-error">{errors.email || ""}</span>
           {isSuccess && (
             <p className="profile__form-status">{setIsEditUserInfoStatus}</p>
           )}

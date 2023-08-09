@@ -4,7 +4,7 @@ import './MoviesCardList.css';
 
 
 const MoviesCardList = ({ movies, errorText }) => {
- 
+  
 
   return (
     <section className='cards'>

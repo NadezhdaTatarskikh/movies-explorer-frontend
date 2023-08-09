@@ -22,10 +22,15 @@ const Movies = ({
   loggedIn,
   onSubmit,
   preloader,
+  isNotFound,
+  isServerError,
   movies,
   searchKeyword,
   onCheckbox,
-  checked
+  checked,
+  onSaveMovie,
+  isSaveMovies,
+  savedMovies
 }) => {
 
   const screenwidth = useScreenWidth(); // получаем значение ширины экрана 
@@ -56,7 +61,6 @@ const Movies = ({
     setMoviesList(moviesList + numberAddMovies);
   }
 
-
   return (
     <>
       <Header loggedIn={loggedIn} />
@@ -67,9 +71,14 @@ const Movies = ({
           checked={checked}
           defaultValue={searchKeyword}
         />
-
-
-        {preloader ? <Preloader /> : <MoviesCardList movies={movies.slice(0, moviesList)} />}
+        {preloader ? <Preloader /> : <MoviesCardList 
+        movies={movies.slice(0, moviesList)} 
+        isNotFound={isNotFound}
+        isServerError={isServerError}
+        onSaveMovie={onSaveMovie}
+        isSaveMovies={isSaveMovies}
+        savedMovies={savedMovies}
+            />}
           <button
           className='movies__button'
             type='button'
