@@ -1,21 +1,16 @@
-import { useState } from 'react';
 import './FilterCheckbox.css';
 
-const FilterCheckbox = (onCheckbox, checked) => {
-  const [checkbox, setCheckbox] = useState(false);
-  const handleCheckbox = () => {
-    setCheckbox(!checkbox);
-  }
+const FilterCheckbox = ({ onCheckbox, checked }) => {
+
   return (
     <div className='checkbox'>
       <input
         className='checkbox__input'
         name='checkbox'
-        onChange={handleCheckbox}
         id='checkbox'
         type='checkbox'
-        value='yes'
         checked={checked}
+        onChange={onCheckbox}
       />
       <label className='checkbox__label' htmlFor='checkbox'>
         Короткометражки

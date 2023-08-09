@@ -21,11 +21,11 @@ useEffect(() => {
   // обработчик сабмита формы
   const handleFormSubmit = (evt) => {
     evt.preventDefault(); // отменяем действие по умолчанию
-    if (!isValid) {
-      setErrorText('Введите ключевое слово');
-      return;
-    }
-    onSubmit(keyword);
+    if (keyword) {
+      onSubmit(keyword);
+    } else {
+      return setErrorText('Введите ключевое слово');   
+    } 
   };
 
   return (
@@ -38,7 +38,7 @@ useEffect(() => {
           type='text'
           placeholder='Фильм'
           required
-          minLength='1'
+          minLength='2'
           maxLength='20'
           value={keyword || ''}
           onChange={handleFormChange}

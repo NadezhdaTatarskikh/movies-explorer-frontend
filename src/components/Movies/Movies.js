@@ -34,7 +34,7 @@ const Movies = ({
 }) => {
 
   const screenwidth = useScreenWidth(); // получаем значение ширины экрана 
-  const [numberAddMovies, setNumberAddMovies] = useState(0); // число добавляемых карточек, при нажатии на кнопку ещё
+  const [numberAddMovies, setNumberAddMovies] = useState({}); // число добавляемых карточек, при нажатии на кнопку ещё
   // eslint-disable-next-line no-unused-vars
   const [moviesList, setMoviesList] = useState({}); // стейт показываемых на странице карточек
 
