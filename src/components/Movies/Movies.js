@@ -28,7 +28,6 @@ const Movies = ({
   searchKeyword,
   onCheckbox,
   checked,
-  onLike,
   checkLike,
   savedMovies,
   onSaveMovie
@@ -79,10 +78,12 @@ const Movies = ({
         onSaveMovie={onSaveMovie}
         checkLike={checkLike}
         savedMovies={savedMovies}
-        isSavedMoviesPage={true}
+        isMoviesPage={true}
             />}
           <button
-          className='movies__button'
+          className={ movies.length <= 7 || moviesList >= movies.length
+          ? 'movies__button_hidden'
+          : 'movies__button'}
             type='button'
             onClick={handleButtonClick}
           >

@@ -26,6 +26,9 @@
    transition: opacity 0.5s linear;
    opacity: 0.5;
 }
+.movies__button_hidden {
+   visibility: hidden;
+}
 
 @media screen and (max-width: 520px) {
    .movies {

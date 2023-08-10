@@ -8,11 +8,13 @@ const Login = ({ onLogin, errorMessage }) => {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormValidation();
 
+    // обработчик отправки данных из формы
   const handleSubmit = (evt) => {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
     if (!values.password || !values.email) {
-      return;
+      // если не введен email или password - ничего не возвращаем
+      return; 
     }
     onLogin(values);
     resetForm();

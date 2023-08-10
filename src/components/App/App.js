@@ -22,7 +22,6 @@ function App() {
   const [isEditUserInfoStatus, setIsEditUserInfoStatus] = useState("");
 
   // Стейты состояния ошибок
-  // eslint-disable-next-line no-unused-vars
   const [errorMessage, setErrorMessage] = useState();
   const [isServerError, setIsServerError] = useState(false); //Произошла ошибка при поиске фильмов
   const [isNotFound, setIsNotFound] = useState(false); // Фильмы по запросу не найдены
@@ -183,8 +182,8 @@ function App() {
   // Меняем состояние чекбокса на короткометражки
   const handleChangeCheckboxSavedMovies = () => {
     if (!shortSavedMovieCheckbox) {
-      setShortSavedMovieCheckbox(true);
       localStorage.setItem("shortSavedMovieCheckbox", true);
+      setShortSavedMovieCheckbox(true);
       setShowAllMovies(filterShortMovies(filterSavedMovies));
       if (filterShortMovies(filterSavedMovies).length === 0) {
         setIsNotFound(true);
@@ -295,9 +294,10 @@ function App() {
     mainApi.saveMovie(movie, jwt)
       .then((newMovie) => {
         setSavedMovies([...savedMovies, newMovie]);
+        console.log('Карточка создана:', movie);
       })
       .catch((err) => {
-        console.log(err);
+        console.log('Ошибка при создании карточки:', err);
       });
   };
 
@@ -313,23 +313,26 @@ function App() {
     if (!deleteMoviesCard) return
     mainApi.deleteMovie(deleteMoviesCard._id, jwt)
       .then(() => {
-        setSavedMovies(savedMovies.filter(c => c._id !== deleteMoviesCard._id))
+        setSavedMovies(savedMovies.filter((c) => c._id !== deleteMoviesCard._id))
       })
       .catch((err) => {
         console.log(err);
       })
   }
 
-  // Выйти из аккаунта
+  // обработчик выхода пользователя из аккаунта, обращение к API, очистка локального хранилища
    const handleLogOut = () => {
-    localStorage.clear();  // удаление данных из localstorage
+      // сбрасываем все стейты при разлогинивании
     setLoggedIn(false);
+    setIsLoading(false);
     setSavedMovies([]);
     setSearchKeyword("");
     setFoundMoviesList(false);
     setShortMovieCheckbox(false);
     setListFoundMovies([]);
     setFoundMoviesList([]);
+    setCurrentUser({});
+    localStorage.clear();  // удаление данных из localstorage
     // переадресация на главную страницу
     navigate("/"); 
   }
@@ -396,11 +399,11 @@ function App() {
           />
           <Route
             path="/signin"
-            element={<Login onLogin={handleAuthorization} loggedIn={loggedIn} />}
+            element={<Login onLogin={handleAuthorization} loggedIn={loggedIn} errorMessage={errorMessage}/>}
           />
           <Route
             path="/signup"
-            element={<Register onRegister={handleRegistration} loggedIn={loggedIn} />}
+            element={<Register onRegister={handleRegistration} loggedIn={loggedIn} errorMessage={errorMessage}/>}
           />
           <Route path="*" element={<NotFound onBack={goBack} />} />
         </Routes>

@@ -3,7 +3,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
 
-const MoviesCardList = ({ movies, errorText, checkLike, onDelete, onSaveMovie, isSavedMoviesPage }) => {
+const MoviesCardList = ({ movies, errorText, checkLike, onDelete, onSaveMovie, isMoviesPage }) => {
   
 
   return (
@@ -12,12 +12,12 @@ const MoviesCardList = ({ movies, errorText, checkLike, onDelete, onSaveMovie, i
       <ul className='cards__list'>
         {movies.map((movie) => (
           <MoviesCard 
-            key={movie.id || movie.movieId} 
             movie={movie}
+            key={movie.id || movie.movieId} 
             checkLike={checkLike} 
             onDelete={onDelete}
             onSaveMovie={onSaveMovie}
-            isSavedMoviesPage={isSavedMoviesPage}
+            isMoviesPage={isMoviesPage}
             />
         ))}
       </ul>
