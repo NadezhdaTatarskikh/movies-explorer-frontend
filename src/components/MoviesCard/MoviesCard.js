@@ -1,15 +1,23 @@
-import React from 'react';
 import './MoviesCard.css';
 //import Movie from '../../images/poster.png';
 import { useLocation } from 'react-router-dom';
-import { convertMinToHours } from '..//..//utils/utils';
+import { convertMinToHours } from '../../utils/utils';
 
-const MoviesCard = ({ movie, onSaveMovie }) => {
+const MoviesCard = ({ movie, onSaveMovie, onDelete, checkLike, isSavedMoviesPage }) => {
   const location = useLocation().pathname; 
 
-  const hadleSaveMovie = () => {
-  onSaveMovie(movie)
-}
+// для удобства сохраняем в переменную класс карточки
+
+const moviesButtonClassName = (`movies-card__button ${checkLike ? 'movies-card__button_active' : ''}`);
+
+  const onLike = () => {
+    onSaveMovie(movie)
+ }
+
+ const handleDeleteMovie = () => {
+  onDelete(movie);
+};
+ 
   return (
     <li className='movies-card'>
       <a href={movie.trailerLink}
@@ -24,7 +32,12 @@ const MoviesCard = ({ movie, onSaveMovie }) => {
       </a>
       <div className='movies-card__description'>
         <h2 className='movies-card__name'>{movie.nameRU || movie.nameEN}</h2>
-        <button className='movies-card__button' type='button' onClick={hadleSaveMovie}></button>
+        
+        {isSavedMoviesPage ? (
+          <button className={moviesButtonClassName} type='button' onClick={onLike} />
+          ) : (  
+             <button className="movies-card__button_delete" type="button" onClick={handleDeleteMovie} />  
+             )}
       </div>
       <p className='movies-card__duration'>{convertMinToHours(movie.duration)}</p>
     </li>

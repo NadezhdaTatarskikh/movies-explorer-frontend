@@ -13,8 +13,7 @@ import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import * as apiAuth from "../../utils/apiAuth";
 import * as moviesApi from "../../utils/MoviesApi";
-import { SHORT_MOVIES } from '../../utils/Constants';
-//import { searchMovies, filterShortMovies } from "../../utils/utils";
+import { searchMovies, filterShortMovies } from "../../utils/utils";
 
 function App() {
   // Стейты состояния пользователя
@@ -25,33 +24,24 @@ function App() {
   // Стейты состояния ошибок
   // eslint-disable-next-line no-unused-vars
   const [errorMessage, setErrorMessage] = useState();
-  // eslint-disable-next-line no-unused-vars
   const [isServerError, setIsServerError] = useState(false); //Произошла ошибка при поиске фильмов
-  // eslint-disable-next-line no-unused-vars
   const [isNotFound, setIsNotFound] = useState(false); // Фильмы по запросу не найдены
-  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false); // // стейт загрузки данных
 
   // Стейты состояния по фильмам
-  //const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов
-  // eslint-disable-next-line no-unused-vars
+  const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов
   const [listFoundMovies, setListFoundMovies] = useState([]); // Список найденных фильмов
-  // eslint-disable-next-line no-unused-vars
   const [foundMoviesList, setFoundMoviesList] = useState([]); // Список фильмов найденных по критериям
 
   // Стейты состояния по фильмам
-  const [movies, setMovies] = useState([]); // Данные всех фильмов
   const [savedMovies, setSavedMovies] = useState([]); // стейт сохранённых фильмов (массив)
-  // eslint-disable-next-line no-unused-vars
   const [showAllMovies, setShowAllMovies] = useState(savedMovies);
   // eslint-disable-next-line no-unused-vars
   const [filterSavedMovies, setFilterSavedMovies] = useState(showAllMovies);
 
   // Стейты состояния для формы поиска фильмов
-  // eslint-disable-next-line no-unused-vars
   const [shortMovieCheckbox, setShortMovieCheckbox] = useState(false); // Флажок короткометражек не выбран
   const [searchKeyword, setSearchKeyword] = useState(""); // Ключевое слово
-  // eslint-disable-next-line no-unused-vars
   const [shortSavedMovieCheckbox, setShortSavedMovieCheckbox] = useState(false);
 
   //добавили хук истории
@@ -60,37 +50,6 @@ function App() {
   useEffect(() => {
     handleTokenCheck();
   }, [loggedIn]);
-
-// обработчик поискового запроса по ключевому слову
-const searchMovies = (movies, keyword, checkbox) => {
-  const moviesSearchКeyword = movies.filter((movie) => {
-    return movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase())
-  })
-  if (checkbox) {
-    return filterShortMovies(moviesSearchКeyword);
-  } else {
-    return moviesSearchКeyword;
-  }
-}
-
-// фильтрация по длительности фильма
-const filterShortMovies = (movies) => {
-  return movies.filter(movie => movie.duration < SHORT_MOVIES);
-}
-
-// Поиск среди сохранённых фильмов
-const handleSearchSavedMovies = (keyword) => {
-  // присваиваем variables
-  const variables = (savedMovies, keyword, shortSavedMovieCheckbox);
-  if (searchMovies(variables).length === 0) {
-    setIsNotFound(true);
-  } else {
-    setIsNotFound(false);
-    setFilterSavedMovies(searchMovies(variables));
-    setShowAllMovies(searchMovies(variables));
-  }
-};
-
 
   // обработчик проверки токена пользователя
   const handleTokenCheck = () => {
@@ -173,7 +132,7 @@ const handleSearchSavedMovies = (keyword) => {
           console.log(userMovies);
           setCurrentUser(userInfo);
           localStorage.setItem("movies", JSON.stringify(userMovies));
-          setMovies(JSON.parse(localStorage.getItem("movies")));
+          setAllMovies(JSON.parse(localStorage.getItem("movies")));
         })
         .catch((err) => {
           console.log(`Произошла ошибка: ${err}`);
@@ -203,16 +162,177 @@ const handleSearchSavedMovies = (keyword) => {
       })
       .finally(() => setIsEditUserInfoStatus(false));
   };
- 
+  // -------------------------SAVEDMOVIES----------------------------- //
+
+  // Отслеживаем наличие сохраненных фильмов
+  useEffect(() => {
+    savedMovies.length !== 0 ? setIsNotFound(false) : setIsNotFound(true);
+  }, [savedMovies]);
+
+  // Отслеживаем состояние стэйта чекбокса
+  useEffect(() => {
+    if (localStorage.getItem("shortSavedMovieCheckbox") === "true") {
+      setShortSavedMovieCheckbox(true);
+      setShowAllMovies(filterShortMovies(savedMovies));
+    } else {
+      setShortSavedMovieCheckbox(false);
+      setShowAllMovies(savedMovies);
+    }
+  }, [savedMovies]);
+
+  // Меняем состояние чекбокса на короткометражки
+  const handleChangeCheckboxSavedMovies = () => {
+    if (!shortSavedMovieCheckbox) {
+      setShortSavedMovieCheckbox(true);
+      localStorage.setItem("shortSavedMovieCheckbox", true);
+      setShowAllMovies(filterShortMovies(filterSavedMovies));
+      if (filterShortMovies(filterSavedMovies).length === 0) {
+        setIsNotFound(true);
+      }
+      setIsNotFound(false);
+    } else {
+      setShortSavedMovieCheckbox(false);
+      localStorage.setItem("shortSavedMovieCheckbox", false);
+      if (filterSavedMovies.length === 0) {
+        setIsNotFound(true);
+      }
+      setIsNotFound(false);
+      setShowAllMovies(filterSavedMovies);
+    }
+  };
+
+  // Поиск среди сохранённых фильмов
+  const handleSearchSavedMovies = (keyword) => {
+    console.log(savedMovies)
+    if (searchMovies((savedMovies, keyword, shortSavedMovieCheckbox).length === 0)) {
+      setIsNotFound(true);
+    } else {
+      setIsNotFound(false);
+      setFilterSavedMovies(searchMovies(savedMovies, keyword, shortSavedMovieCheckbox));
+      setShowAllMovies(searchMovies(savedMovies, keyword, shortSavedMovieCheckbox));
+    }
+  };
+
+  // ------------------------------------MOVIES----------------------- //
+
+  // Отслеживание состояния стэйтов
+  useEffect(() => {
+    setSearchKeyword(localStorage.getItem("searchKeyword" || ""));
+    setShortMovieCheckbox(localStorage.getItem("shortMovieCheckbox" || "") === "true");
+    if (localStorage.getItem("foundMoviesList")) {
+      const movies = JSON.parse(localStorage.getItem("foundMoviesList"));
+      setListFoundMovies(movies)
+      if (localStorage.getItem("shortMovieCheckbox") === "true") {
+        setFoundMoviesList(filterShortMovies(movies));
+      } else {
+        setFoundMoviesList(movies);
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Меняем состояние чекбокса на короткометражки
+  const handleChangeCheckbox = () => {
+    setShortMovieCheckbox(!shortMovieCheckbox);
+    console.log(shortMovieCheckbox);
+    if (!shortMovieCheckbox) {
+      setFoundMoviesList(filterShortMovies(listFoundMovies));
+      if (foundMoviesList.length === 0) {
+        setIsNotFound(true);
+      }
+    } else {
+      setFoundMoviesList(listFoundMovies);
+    }
+    localStorage.setItem("shortMovieCheckbox", !shortMovieCheckbox);
+  };
+
+  // обработчик поискового запроса по критериям
+  const handleSetFilterMovies = (movies, keyword, checkbox) => {
+    setIsLoading(true);
+    // локально отфильтровываем фильмы согласно запросу
+    const moviesList = searchMovies(movies, keyword, false);
+    // если ничего не найдено - открывается сообщение об ошибке
+    if (moviesList.length === 0 ? setIsNotFound(true) : setIsNotFound(false))
+      // устанавливаем стейт setListFoundMovies
+      setListFoundMovies(moviesList);
+    // устанавливаем стейт filteredMoviesList в зависимости от состояния чекбокса
+    setFoundMoviesList(checkbox ? filterShortMovies(moviesList) : moviesList);
+    // создаём локальное хранилище foundMoviesList
+    localStorage.setItem("foundMoviesList", JSON.stringify(moviesList));
+    setTimeout(() => setIsLoading(false), 1000);
+  };
+
+
+  // Обработаем запрос пользователя по поиску фильмов
+  const handleRequestMovies = (keyword) => {
+    localStorage.setItem("searchKeyword", keyword); // Записываем в сторедж введенное ключевое слово
+    localStorage.setItem("shortMovieCheckbox", shortMovieCheckbox); // Записываем в сторедж выставленное положение флажка
+    if (allMovies.length === 0) {
+      // если фильмов в сторедж нет, сделаем запрос к BeatfilmMoviesApi
+      setIsLoading(true);
+      moviesApi
+        .getAllMovies()
+        .then((movies) => {
+          setIsLoading(true);
+          localStorage.setItem("allMovies", JSON.stringify(movies)); // Записываем в сторедж все полученные фильмы с BeatfilmMoviesApi
+          setAllMovies(movies);
+          handleSetFilterMovies(movies, keyword, shortMovieCheckbox); // Находим фильмы по запросу и выставленным критериям
+        })
+        .catch((err) => {
+          setIsServerError(true);
+        })
+        .finally(() => {
+          setTimeout(() => setIsLoading(false), 1000);
+        });
+    } else {
+      handleSetFilterMovies(allMovies, keyword, shortMovieCheckbox);
+    }
+  };
+
+  // Обработчик запоса на сохранённые фильмы
+  const onLike = (movie) => {
+    const jwt = localStorage.getItem("jwt");
+    mainApi.saveMovie(movie, jwt)
+      .then((newMovie) => {
+        setSavedMovies([...savedMovies, newMovie]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Проверяем сохранение фильма
+  const checkLike = (movie) => {
+    savedMovies.some((item) => item.movieId === movie.id && item.owner === currentUser._id);
+     };
+
+   // Обработчик запоса на удаления фильма с страницы "Сохраненные фильмы"
+  const handleDeleteMovie = (movie) => {
+    const jwt = localStorage.getItem('jwt');
+    const deleteMoviesCard = savedMovies.find(item => item.movieId === (movie.id || movie.movieId) && item.owner === currentUser._id)
+    if (!deleteMoviesCard) return
+    mainApi.deleteMovie(deleteMoviesCard._id, jwt)
+      .then(() => {
+        setSavedMovies(savedMovies.filter(c => c._id !== deleteMoviesCard._id))
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   // Выйти из аккаунта
-  const handleLogOut = () => {
-    localStorage.clear();
+   const handleLogOut = () => {
+    localStorage.clear();  // удаление данных из localstorage
     setLoggedIn(false);
     setSavedMovies([]);
     setSearchKeyword("");
-    navigate("/"); //Делаем переадресацию на главную страницу
-  };
+    setFoundMoviesList(false);
+    setShortMovieCheckbox(false);
+    setListFoundMovies([]);
+    setFoundMoviesList([]);
+    // переадресация на главную страницу
+    navigate("/"); 
+  }
 
   const goBack = () => {
     navigate(-1);
@@ -229,14 +349,18 @@ const handleSearchSavedMovies = (keyword) => {
               <ProtectedRoute
                 element={Movies}
                 loggedIn={loggedIn}
-                SavedMovies={savedMovies}
-                movies={movies}
-                isLoading={isLoading}             
+                movies={foundMoviesList}
+                isLoading={isLoading}
+                onSaveMovie={onLike}
+                onCheckbox={handleChangeCheckbox}
                 searchKeyword={searchKeyword}
                 checked={shortMovieCheckbox}
+                checkLike={checkLike}
+                onSubmit={handleRequestMovies}
                 isNotFound={isNotFound}
                 isServerError={isServerError}
                 savedMovies={savedMovies}
+                onDelete={handleDeleteMovie}
               />
             }
           />
@@ -246,12 +370,14 @@ const handleSearchSavedMovies = (keyword) => {
               <ProtectedRoute
                 element={SavedMovies}
                 loggedIn={loggedIn}
-                SavedMovies={savedMovies}
                 movies={showAllMovies}
+                onSubmit={handleSearchSavedMovies}
+                onCheckbox={handleChangeCheckboxSavedMovies}
+                checkLike={checkLike}
                 saveMovie={savedMovies}
                 isNotFound={isNotFound}
                 checked={shortSavedMovieCheckbox}
-                onSubmit={handleSearchSavedMovies}
+                onDelete={handleDeleteMovie}
               />
             }
           />

@@ -74,8 +74,9 @@ const Profile = ({
               onChange={handleChange}
             />
           </div>
+          <div className="profile__line">
+          </div>
           <span className="profile__form-error">{errors.name || ""}</span>
-          <div className="profile__line"></div>
           <div className="profile__data">
             <label className="profile__label" htmlFor="email">
               E-mail

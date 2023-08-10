@@ -70,6 +70,7 @@ export const saveMovie = (movie, jwt) => {
   }).then((res) => checkResponse(res));
 };
 
+
 // функция удаления фильма из БД на бэкенде по его id, метод DELETE
 export const deleteMovie = (id, jwt) => {
   return fetch(`${BASE_URL}/movies/${id}`, {

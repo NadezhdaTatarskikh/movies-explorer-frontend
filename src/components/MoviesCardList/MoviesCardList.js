@@ -3,7 +3,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
 
-const MoviesCardList = ({ movies, errorText }) => {
+const MoviesCardList = ({ movies, errorText, checkLike, onDelete, onSaveMovie, isSavedMoviesPage }) => {
   
 
   return (
@@ -13,7 +13,12 @@ const MoviesCardList = ({ movies, errorText }) => {
         {movies.map((movie) => (
           <MoviesCard 
             key={movie.id || movie.movieId} 
-            movie={movie} />
+            movie={movie}
+            checkLike={checkLike} 
+            onDelete={onDelete}
+            onSaveMovie={onSaveMovie}
+            isSavedMoviesPage={isSavedMoviesPage}
+            />
         ))}
       </ul>
     </section>
