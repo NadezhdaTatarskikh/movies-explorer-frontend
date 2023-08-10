@@ -303,13 +303,13 @@ function App() {
 
   // Проверяем сохранение фильма
   const checkLike = (movie) => {
-    savedMovies.some((item) => item.movieId === movie.id && item.owner === currentUser._id);
+    return savedMovies.some(item => item.movieId === movie.id)
      };
 
    // Обработчик запоса на удаления фильма с страницы "Сохраненные фильмы"
   const handleDeleteMovie = (movie) => {
     const jwt = localStorage.getItem('jwt');
-    const deleteMoviesCard = savedMovies.find(item => item.movieId === (movie.id || movie.movieId) && item.owner === currentUser._id)
+    const deleteMoviesCard = savedMovies.find((item) => item.movieId === (movie.id || movie.movieId))
     if (!deleteMoviesCard) return
     mainApi.deleteMovie(deleteMoviesCard._id, jwt)
       .then(() => {

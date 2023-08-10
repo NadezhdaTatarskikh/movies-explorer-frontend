@@ -30,7 +30,7 @@ const Movies = ({
   checked,
   checkLike,
   savedMovies,
-  onSaveMovie
+  onSaveMovie,
 }) => {
 
   const screenwidth = useScreenWidth(); // получаем значение ширины экрана 

@@ -5,10 +5,10 @@ import { convertMinToHours } from '../../utils/utils';
 
 const MoviesCard = ({ movie, onSaveMovie, onDelete, checkLike, isMoviesPage }) => {
   const location = useLocation().pathname; 
-
+const isLiked = checkLike(movie);
 // для удобства сохраняем в переменную класс карточки
 
-const moviesButtonClassName = (`movies-card__button ${checkLike ? 'movies-card__button movies-card__button_active' : ''}`);
+const moviesButtonClassName = (`movies-card__button ${isLiked ? 'movies-card__button movies-card__button_active' : ''}`);
 
   const onLike = () => {
     onSaveMovie(movie)
