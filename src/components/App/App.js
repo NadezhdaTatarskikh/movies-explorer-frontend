@@ -291,7 +291,7 @@ function App() {
   // Обработчик запоса на сохранённые фильмы
   const onLike = (movie) => {
     const jwt = localStorage.getItem("jwt");
-    mainApi.saveMovie(movie, jwt)
+    mainApi.addMovie(movie, jwt)
       .then((newMovie) => {
         setSavedMovies([...savedMovies, newMovie]);
         console.log('Карточка создана:', movie);
@@ -303,17 +303,17 @@ function App() {
 
   // Проверяем сохранение фильма
   const checkLike = (movie) => {
-    return savedMovies.some(item => item.movieId === movie.id)
+    return savedMovies.some((item) => item.movieId === movie.id)
      };
 
    // Обработчик запоса на удаления фильма с страницы "Сохраненные фильмы"
   const handleDeleteMovie = (movie) => {
     const jwt = localStorage.getItem('jwt');
-    const deleteMoviesCard = savedMovies.find((item) => item.movieId === (movie.id || movie.movieId))
-    if (!deleteMoviesCard) return
-    mainApi.deleteMovie(deleteMoviesCard._id, jwt)
+    const deleteMovie = savedMovies.find(item => item.movieId === (movie.id || movie.movieId))
+    if (!deleteMovie) return
+    mainApi.deleteMovie(deleteMovie._id, jwt)
       .then(() => {
-        setSavedMovies(savedMovies.filter((c) => c._id !== deleteMoviesCard._id))
+        setSavedMovies(savedMovies.filter(c => c._id !== deleteMovie._id))
       })
       .catch((err) => {
         console.log(err);
@@ -363,7 +363,7 @@ function App() {
                 isNotFound={isNotFound}
                 isServerError={isServerError}
                 savedMovies={savedMovies}
-                onDelete={handleDeleteMovie}
+                deleteMoviesCard={handleDeleteMovie}
               />
             }
           />
@@ -380,7 +380,7 @@ function App() {
                 saveMovie={savedMovies}
                 isNotFound={isNotFound}
                 checked={shortSavedMovieCheckbox}
-                onDelete={handleDeleteMovie}
+                deleteMoviesCard={handleDeleteMovie}
               />
             }
           />

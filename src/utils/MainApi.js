@@ -47,7 +47,7 @@ export const getSavedMovies = (jwt) => {
 };
 
 // Cохраняем фильмы пользователя
-export const saveMovie = (movie, jwt) => {
+export const addMovie = (movie, jwt) => {
   return fetch(`${BASE_URL}/movies`, {
       method: 'POST',
       headers: {

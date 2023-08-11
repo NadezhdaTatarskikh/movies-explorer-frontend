@@ -3,7 +3,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
 
-const MoviesCardList = ({ movies, errorText, checkLike, onDelete, onSaveMovie, isMoviesPage }) => {
+const MoviesCardList = ({ movies, errorText, checkLike, deleteMovies, onSaveMovie, isMoviesPage }) => {
   
 
   return (
@@ -15,7 +15,7 @@ const MoviesCardList = ({ movies, errorText, checkLike, onDelete, onSaveMovie, i
             movie={movie}
             key={movie.id || movie.movieId} 
             checkLike={checkLike} 
-            onDelete={onDelete}
+            deleteMovies={deleteMovies}
             onSaveMovie={onSaveMovie}
             isMoviesPage={isMoviesPage}
             />
