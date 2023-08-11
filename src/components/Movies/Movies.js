@@ -31,7 +31,7 @@ const Movies = ({
   checkLike,
   savedMovies,
   onSaveMovie,
-  deleteMoviesCard
+  onDelete
 }) => {
 
   const screenwidth = useScreenWidth(); // получаем значение ширины экрана 
@@ -80,7 +80,7 @@ const Movies = ({
         checkLike={checkLike}
         savedMovies={savedMovies}
         isMoviesPage={true}
-        deleteMoviesCard={deleteMoviesCard}
+        onDelete={onDelete}
             />}
           <button
           className={movies.length <= 7 || moviesList >= movies.length

@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-const SavedMovies = ({ loggedIn, preloader, movies, onCheckbox, checkLike, onSubmit, checked, savedMovies, onLike, deleteMoviesCard }) => {
+const SavedMovies = ({ loggedIn, preloader, movies, onCheckbox, checkLike, onSubmit, checked, savedMovies, onLike, onDelete }) => {
 
   return (
     <>
@@ -22,7 +22,7 @@ const SavedMovies = ({ loggedIn, preloader, movies, onCheckbox, checkLike, onSub
       ) : (
         <MoviesCardList 
         movies={movies}
-        deleteMoviesCard={deleteMoviesCard}
+        onDelete={onDelete}
         onLike={onLike}
         savedMovies={savedMovies}
         isMoviesPage={false} 

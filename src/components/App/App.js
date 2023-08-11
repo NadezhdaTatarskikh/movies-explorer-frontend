@@ -288,6 +288,12 @@ function App() {
     }
   };
 
+
+  // Проверяем сохранение фильма
+  const checkLike = (movie) => {
+    return savedMovies.some((item) => item.movieId === movie.id)
+     };
+
   // Обработчик запоса на сохранённые фильмы
   const onLike = (movie) => {
     const jwt = localStorage.getItem("jwt");
@@ -301,19 +307,14 @@ function App() {
       });
   };
 
-  // Проверяем сохранение фильма
-  const checkLike = (movie) => {
-    return savedMovies.some((item) => item.movieId === movie.id)
-     };
-
    // Обработчик запоса на удаления фильма с страницы "Сохраненные фильмы"
   const handleDeleteMovie = (movie) => {
     const jwt = localStorage.getItem('jwt');
-    const deleteMovie = savedMovies.find((item) => item.movieId === (movie.id || movie.movieId))
-    if (!deleteMovie) return
-    mainApi.deleteMovie(deleteMovie._id, jwt)
+    const deleteCard = savedMovies.find(item => item.movieId === (movie.id || movie.movieId))
+    if (!deleteCard) return
+    mainApi.deleteMovie(deleteCard._id, jwt)
       .then(() => {
-        setSavedMovies(savedMovies.filter(c => c._id !== deleteMovie._id))
+        setSavedMovies(savedMovies.filter(c => c._id !== deleteCard._id))
       })
       .catch((err) => {
         console.log(err);
@@ -363,7 +364,7 @@ function App() {
                 isNotFound={isNotFound}
                 isServerError={isServerError}
                 savedMovies={savedMovies}
-                deleteMoviesCard={handleDeleteMovie}
+                onDelete={handleDeleteMovie}
               />
             }
           />
@@ -380,7 +381,7 @@ function App() {
                 saveMovie={savedMovies}
                 isNotFound={isNotFound}
                 checked={shortSavedMovieCheckbox}
-                deleteMoviesCard={handleDeleteMovie}
+                onDelete={handleDeleteMovie}
               />
             }
           />
