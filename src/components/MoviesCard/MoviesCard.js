@@ -3,7 +3,7 @@ import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import { convertMinToHours } from '../../utils/utils';
 
-const MoviesCard = ({ movie, onSaveMovie, deleteMovie, checkLike, isMoviesPage }) => {
+const MoviesCard = ({ movie, onSaveMovie, deleteMoviesCard, checkLike, isMoviesPage }) => {
   const location = useLocation().pathname; 
 const isLiked = checkLike(movie);
 // для удобства сохраняем в переменную класс карточки
@@ -14,8 +14,8 @@ const moviesButtonClassName = (`movies-card__button ${isLiked ? 'movies-card__bu
     onSaveMovie(movie)
  }
 
- const handleDeleteMovie = () => {
-  deleteMovie(movie)
+ const handledeleteMovies = () => {
+  deleteMoviesCard(movie)
 };
  
   return (
@@ -36,7 +36,7 @@ const moviesButtonClassName = (`movies-card__button ${isLiked ? 'movies-card__bu
         {isMoviesPage ? (
           <button className={moviesButtonClassName} type='button' onClick={onLike} />
           ) : (  
-             <button className="movies-card__button movies-card__button_delete" type="button" onClick={handleDeleteMovie} />  
+             <button className="movies-card__button movies-card__button_delete" type="button" onClick={handledeleteMovies} />  
              )}
       </div>
       <p className='movies-card__duration'>{convertMinToHours(movie.duration)}</p>

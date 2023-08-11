@@ -309,7 +309,7 @@ function App() {
    // Обработчик запоса на удаления фильма с страницы "Сохраненные фильмы"
   const handleDeleteMovie = (movie) => {
     const jwt = localStorage.getItem('jwt');
-    const deleteMovie = savedMovies.find(item => item.movieId === (movie.id || movie.movieId))
+    const deleteMovie = savedMovies.find((item) => item.movieId === (movie.id || movie.movieId))
     if (!deleteMovie) return
     mainApi.deleteMovie(deleteMovie._id, jwt)
       .then(() => {
