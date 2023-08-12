@@ -165,7 +165,7 @@ function App() {
   useEffect(() => {
     if (allMovies.length === 0) return;
     if (!searchKeyword) return setErrorMessage(ERRORS.NEED_LETTERS);
-    if (listFoundMovies.length === 0) {
+    if (foundMoviesList.length === 0) {
       setErrorMessage(ERRORS.NOT_FOUND);
     } else {
       setErrorMessage('');
@@ -339,6 +339,7 @@ function App() {
 
   // обработчик выхода пользователя из аккаунта, обращение к API, очистка локального хранилища
   const handleLogOut = () => {
+    localStorage.clear(); // удаление данных из localstorage
     // сбрасываем все стейты при разлогинивании
       setLoggedIn(false);
       setIsLoading(false);
@@ -349,7 +350,6 @@ function App() {
       setSearchKeyword('');
       setFoundMoviesList([]);
       setCurrentUser({});
-      localStorage.clear(); // удаление данных из localstorage
     // переадресация на главную страницу
       navigate('/');
   };
