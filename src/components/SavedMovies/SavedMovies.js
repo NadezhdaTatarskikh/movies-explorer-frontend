@@ -4,10 +4,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
 
-const SavedMovies = ({ loggedIn, preloader, movies, onCheckbox, checkLike, onSubmit, checked, savedMovies, onLike, onDelete }) => {
-
+const SavedMovies = ({ loggedIn, movies, onCheckbox, checkLike, onSubmit, checked, savedMovies, onLike, onDelete }) => {
+  
   return (
     <>
       <Header loggedIn={loggedIn} />
@@ -17,9 +16,6 @@ const SavedMovies = ({ loggedIn, preloader, movies, onCheckbox, checkLike, onSub
         checked={checked}
         onSubmit={onSubmit}
         />
-        {preloader ? (
-          <Preloader />
-      ) : (
         <MoviesCardList 
         movies={movies}
         onDelete={onDelete}
@@ -28,7 +24,6 @@ const SavedMovies = ({ loggedIn, preloader, movies, onCheckbox, checkLike, onSub
         isMoviesPage={false} 
         checkLike={checkLike}
         />
-      )}
       </main>
       <Footer />
     </>

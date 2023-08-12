@@ -31,3 +31,17 @@ export const SCREEN_XS = 480;
 export const SCREEN_MD = 560;
 export const SCREEN_LG = 1150;
 export const SCREEN_XL = 1280;
+
+export const RES_ERRORS = {
+  SERVER_500: 'На сервере произошла ошибка',
+
+ REGISTRATION_409: 'Пользователь с таким email уже существует',
+ REGISTRATION_DEFAUTLT: 'Переданы некорректные данные',
+
+ AUTHORIZATION_401: 'Вы ввели неправильный email или пароль',
+ AUTHORIZATION_DEFAULT: 'Что-то пошло не так...',
+
+  UPDATE_PROFILE: 'Пользователь с таким email уже существует',
+  UPDATE_DEFAULT_400: 'При обновлении профиля произошла ошибка',
+  UPDATE_SUCCESS: 'Данные успешно обновлены!',
+}

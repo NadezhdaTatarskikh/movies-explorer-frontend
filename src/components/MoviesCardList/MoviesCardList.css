@@ -7,11 +7,23 @@
   gap: 37px 24px;
 }
 
-.movies__error {
-  color: #ee3465;
-  display: block;
+.cards__errors {
+  display: none;
+}
+
+.cards__errors_visible {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 20px;
+  padding: 0;
+  color: #EE3465;
+  margin: 50px auto 0;
+  max-width: 300px;
+  align-self: center;
+  justify-self: center;
   text-align: center;
 }
+
 
 @media screen and (max-width: 1150px) {
   .cards__list {

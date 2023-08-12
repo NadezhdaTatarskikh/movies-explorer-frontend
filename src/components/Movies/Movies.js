@@ -21,7 +21,7 @@ import {
 const Movies = ({
   loggedIn,
   onSubmit,
-  preloader,
+  isLoading,
   isNotFound,
   isServerError,
   movies,
@@ -72,7 +72,8 @@ const Movies = ({
           checked={checked}
           defaultValue={searchKeyword}
         />
-        {preloader ? <Preloader /> : <MoviesCardList 
+        {isLoading ? <Preloader /> 
+        : <MoviesCardList 
         movies={movies.slice(0, moviesList)} 
         isNotFound={isNotFound}
         isServerError={isServerError}

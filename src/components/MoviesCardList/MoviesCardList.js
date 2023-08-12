@@ -1,24 +1,38 @@
-
+import { useEffect } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
+const MoviesCardList = ({
+  movies,
+  checkLike,
+  onDelete,
+  onSaveMovie,
+  isMoviesPage,
+  isNotFound,
+  isServerError,
+  allMovies,
+}) => {
 
-const MoviesCardList = ({ movies, errorText, checkLike, onDelete, onSaveMovie, isMoviesPage }) => {
-  
 
   return (
     <section className='cards'>
-      <span className='movies__error'>{errorText}</span>
+       <p className={isNotFound ? 'cards__errors_visible' : 'cards__errors'}>
+        Результаты не найдены
+      </p>
+      <p className={isServerError ? 'cards__errors_visible' : 'cards__errors'}>
+        Во время запроса произошла ошибка. Возможно, проблема с соединением или
+        сервер недоступен. Подождите немного и попробуйте ещё раз
+      </p>
       <ul className='cards__list'>
         {movies.map((movie) => (
-          <MoviesCard 
+          <MoviesCard
             movie={movie}
-            key={movie.id || movie.movieId} 
-            checkLike={checkLike} 
+            key={movie.id || movie.movieId}
+            checkLike={checkLike}
             onDelete={onDelete}
             onSaveMovie={onSaveMovie}
             isMoviesPage={isMoviesPage}
-            />
+          />
         ))}
       </ul>
     </section>
@@ -26,5 +40,3 @@ const MoviesCardList = ({ movies, errorText, checkLike, onDelete, onSaveMovie, i
 };
 
 export default MoviesCardList;
-
-// MoviesCardList — компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством.

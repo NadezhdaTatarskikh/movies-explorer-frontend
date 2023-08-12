@@ -65,7 +65,7 @@ const Profile = ({
               id="profile__name"
               type="text"
               name="name"
-               placeholder='Введите имя'
+              placeholder='Введите имя'
               required
               minLength="2"
               maxLength="30"
