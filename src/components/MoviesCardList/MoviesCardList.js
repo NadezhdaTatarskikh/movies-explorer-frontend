@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
+import { ERRORS } from '../../utils/Constants';
 
 const MoviesCardList = ({
   movies,
@@ -10,18 +10,16 @@ const MoviesCardList = ({
   isMoviesPage,
   isNotFound,
   isServerError,
-  allMovies,
 }) => {
 
 
   return (
     <section className='cards'>
        <p className={isNotFound ? 'cards__errors_visible' : 'cards__errors'}>
-        Результаты не найдены
+        {ERRORS.NOT_FOUND}
       </p>
       <p className={isServerError ? 'cards__errors_visible' : 'cards__errors'}>
-        Во время запроса произошла ошибка. Возможно, проблема с соединением или
-        сервер недоступен. Подождите немного и попробуйте ещё раз
+        {ERRORS.SEARCH_ERROR}
       </p>
       <ul className='cards__list'>
         {movies.map((movie) => (

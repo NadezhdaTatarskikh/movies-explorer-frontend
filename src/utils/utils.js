@@ -27,7 +27,6 @@ export const searchMovies = (movies, keyword, checkbox) => {
     return moviesSearchКeyword;
   }
 };
-
 // фильтрация по длительности фильма
 export const filterShortMovies = (movies) => {
   return movies.filter((movie) => movie.duration < SHORT_MOVIES);

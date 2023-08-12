@@ -14,7 +14,7 @@ import NotFound from '../NotFound/NotFound';
 import * as apiAuth from '../../utils/apiAuth';
 import * as moviesApi from '../../utils/MoviesApi';
 import { searchMovies, filterShortMovies } from '../../utils/utils';
-import { RES_ERRORS } from '../../utils/Constants';
+import { RES_ERRORS, ERRORS } from '../../utils/Constants';
 
 function App() {
   // Стейты состояния пользователя
@@ -22,7 +22,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isEditUserInfoStatus, setIsEditUserInfoStatus] = useState('');
 
-  // Стейты состояния ошибок
+  // Стейты ошибок
   const [errorMessage, setErrorMessage] = useState();
   const [isServerError, setIsServerError] = useState(false); //Произошла ошибка при поиске фильмов
   const [isNotFound, setIsNotFound] = useState(false); // Фильмы по запросу не найдены
@@ -162,10 +162,16 @@ function App() {
   };
   // -------------------------SAVEDMOVIES----------------------------- //
 
-  // Отслеживаем наличие сохраненных фильмов
   useEffect(() => {
-    savedMovies.length !== 0 ? setIsNotFound(false) : setIsNotFound(true);
-  }, [savedMovies]);
+    if (allMovies.length === 0) return;
+    if (!searchKeyword) return setErrorMessage(ERRORS.NEED_LETTERS);
+    if (listFoundMovies.length === 0) {
+      setErrorMessage(ERRORS.NOT_FOUND);
+    } else {
+      setErrorMessage('');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allMovies]);
 
   // Отслеживаем состояние стэйта чекбокса
   useEffect(() => {
@@ -334,18 +340,18 @@ function App() {
   // обработчик выхода пользователя из аккаунта, обращение к API, очистка локального хранилища
   const handleLogOut = () => {
     // сбрасываем все стейты при разлогинивании
-    setLoggedIn(false);
-    setIsLoading(false);
-    setSavedMovies([]);
-    setSearchKeyword('');
-    setFoundMoviesList(false);
-    setShortMovieCheckbox(false);
-    setListFoundMovies([]);
-    setFoundMoviesList([]);
-    setCurrentUser({});
-    localStorage.clear(); // удаление данных из localstorage
+      setLoggedIn(false);
+      setIsLoading(false);
+      setListFoundMovies([]);
+      setSavedMovies([]);
+      setFoundMoviesList(false);
+      setShortMovieCheckbox(false);
+      setSearchKeyword('');
+      setFoundMoviesList([]);
+      setCurrentUser({});
+      localStorage.clear(); // удаление данных из localstorage
     // переадресация на главную страницу
-    navigate('/');
+      navigate('/');
   };
 
   return (
