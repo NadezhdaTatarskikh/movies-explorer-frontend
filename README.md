@@ -1,7 +1,7 @@
 # Дипломный проект. Курс Яндекс Практикум "Веб-разработчик" ( movies-explorer-frontend).
 
 
-## Ссылка на сайт: (https://api.tatarskikhna.diploma.nomoreparties.sbs)
+## Ссылка на сайт: (https://tatarskikhna.diploma.nomoreparties.sbs)
 
 ## Ссылка на репозиторий (https://github.com/NadezhdaTatarskikh/movies-explorer-frontend/tree/level-3)
 
