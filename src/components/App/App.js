@@ -71,7 +71,7 @@ function App() {
       .then((data) => {
         setLoggedIn(true);
         setSavedMovies(data);
-        setAllMovies(data);
+        setShowAllMovies(data);
       })
       .catch((err) => {
         console.log(err);
@@ -119,7 +119,7 @@ function App() {
             setCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
             localStorage.setItem('movies', JSON.stringify(userMovies));
             setAllMovies(JSON.parse(localStorage.getItem('movies')));
-            setAllMovies(userMovies);
+            setShowAllMovies(userMovies);
           }
         );
       })
@@ -174,11 +174,14 @@ function App() {
     }
   }, [foundMoviesList]);
 
+
   // Меняем состояние чекбокса на короткометражки
   const handleChangeCheckboxSavedMovies = () => {
+    setShortSavedMovieCheckbox(!shortSavedMovieCheckbox)
     if (!shortSavedMovieCheckbox) {
       localStorage.setItem('shortSavedMovieCheckbox', true);
       setShortSavedMovieCheckbox(true);
+      setShowAllMovies(filterShortMovies(showAllMovies));
       if (filterShortMovies(filterSavedMovies).length === 0) {
         setIsNotFound(true);
       }
