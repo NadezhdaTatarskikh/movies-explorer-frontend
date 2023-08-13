@@ -36,7 +36,6 @@ function App() {
   // Стейты состояния по фильмам
   const [savedMovies, setSavedMovies] = useState([]); // стейт сохранённых фильмов (массив)
   const [showAllMovies, setShowAllMovies] = useState(savedMovies);
-  // eslint-disable-next-line no-unused-vars
   const [filterSavedMovies, setFilterSavedMovies] = useState(showAllMovies);
 
   // Стейты состояния для формы поиска фильмов
@@ -118,6 +117,7 @@ function App() {
             setCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
             localStorage.setItem('movies', JSON.stringify(userMovies));
             setAllMovies(JSON.parse(localStorage.getItem('movies')));
+            setAllMovies(userMovies);
           }
         );
       })
@@ -163,24 +163,25 @@ function App() {
   // -------------------------SAVEDMOVIES----------------------------- //
 
   useEffect(() => {
-    if (allMovies.length === 0) return;
+    if (savedMovies.length === 0) return;
     if (!searchKeyword) return setErrorMessage(ERRORS.NEED_LETTERS);
     if (foundMoviesList.length === 0) {
       setErrorMessage(ERRORS.NOT_FOUND);
     } else {
       setErrorMessage('');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allMovies]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [foundMoviesList]);
+  
 
   // Отслеживаем состояние стэйта чекбокса
   useEffect(() => {
     if (localStorage.getItem('shortSavedMovieCheckbox') === 'true') {
       setShortSavedMovieCheckbox(true);
-      setShowAllMovies(filterShortMovies(savedMovies));
+//      setShowAllMovies(filterShortMovies(savedMovies));
     } else {
       setShortSavedMovieCheckbox(false);
-      setShowAllMovies(savedMovies);
+//      setShowAllMovies(savedMovies);
     }
   }, [savedMovies]);
 
@@ -189,7 +190,7 @@ function App() {
     if (!shortSavedMovieCheckbox) {
       localStorage.setItem('shortSavedMovieCheckbox', true);
       setShortSavedMovieCheckbox(true);
-      setShowAllMovies(filterShortMovies(filterSavedMovies));
+     // setShowAllMovies(filterShortMovies(filterSavedMovies));
       if (filterShortMovies(filterSavedMovies).length === 0) {
         setIsNotFound(true);
       }
@@ -208,18 +209,15 @@ function App() {
   // Поиск среди сохранённых фильмов
   const handleSearchSavedMovies = (keyword) => {
     console.log(savedMovies);
+    const foundSavedMovies = searchMovies(savedMovies, keyword, shortSavedMovieCheckbox);
     if (
-      searchMovies((savedMovies, keyword, shortSavedMovieCheckbox).length === 0)
+      foundSavedMovies.length === 0
     ) {
       setIsNotFound(true);
     } else {
       setIsNotFound(false);
-      setFilterSavedMovies(
-        searchMovies(savedMovies, keyword, shortSavedMovieCheckbox)
-      );
-      setShowAllMovies(
-        searchMovies(savedMovies, keyword, shortSavedMovieCheckbox)
-      );
+      setFilterSavedMovies(foundSavedMovies);
+      setShowAllMovies(foundSavedMovies)
     }
   };
 
@@ -240,7 +238,6 @@ function App() {
         setFoundMoviesList(movies);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Меняем состояние чекбокса на короткометражки
@@ -265,8 +262,8 @@ function App() {
     const moviesList = searchMovies(movies, keyword, false);
     // если ничего не найдено - открывается сообщение об ошибке
     moviesList.length === 0 ? setIsNotFound(true) : setIsNotFound(false);
-      // устанавливаем стейт setListFoundMovies
-      setListFoundMovies(moviesList);
+    // устанавливаем стейт setListFoundMovies
+    setListFoundMovies(moviesList);
     // устанавливаем стейт filteredMoviesList в зависимости от состояния чекбокса
     setFoundMoviesList(checkbox ? filterShortMovies(moviesList) : moviesList);
     // создаём локальное хранилище foundMoviesList
@@ -341,17 +338,18 @@ function App() {
   const handleLogOut = () => {
     localStorage.clear(); // удаление данных из localstorage
     // сбрасываем все стейты при разлогинивании
-      setLoggedIn(false);
-      setIsLoading(false);
-      setListFoundMovies([]);
-      setSavedMovies([]);
-      setFoundMoviesList(false);
-      setShortMovieCheckbox(false);
-      setSearchKeyword('');
-      setFoundMoviesList([]);
-      setCurrentUser({});
+    setLoggedIn(false);
+    handleTokenCheck(null);
+    setIsLoading(false);
+    setListFoundMovies([]);
+    setSavedMovies([]);
+    setFoundMoviesList(false);
+    setShortMovieCheckbox(false);
+    setSearchKeyword('');
+    setFoundMoviesList([]);
+    setCurrentUser({});
     // переадресация на главную страницу
-      navigate('/');
+    navigate('/');
   };
 
   return (
