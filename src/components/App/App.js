@@ -172,6 +172,7 @@ function App() {
     }
   }, [foundMoviesList, savedMovies, searchKeyword]);
 
+
   // Отслеживаем состояние стэйта чекбокса
   useEffect(() => {
     if (localStorage.getItem('shortSavedMovieCheckbox') === 'true') {
