@@ -3,7 +3,7 @@
 
 ## Ссылка на сайт: (https://tatarskikhna.diploma.nomoreparties.sbs)
 
-## Ссылка на репозиторий (https://github.com/NadezhdaTatarskikh/movies-explorer-frontend/tree/level-3)
+## Ссылка на репозиторий (https://github.com/NadezhdaTatarskikh/movies-explorer-frontend/pull/2)
 
 ## Ссылка на back-end (https://github.com/NadezhdaTatarskikh/movies-explorer-api)
 
