@@ -34,7 +34,7 @@ const moviesButtonClassName = (`movies-card__button ${isLiked ? 'movies-card__bu
         <h2 className='movies-card__name'>{movie.nameRU || movie.nameEN}</h2>
         
         {isMoviesPage ? (
-          <button className={moviesButtonClassName} type='button' onClick={onLike} />
+          <button className={moviesButtonClassName} type='button' onClick={isLiked ? handleDeleteMovie : onLike} />
           ) : (  
              <button className="movies-card__button movies-card__button_delete" type="button" onClick={handleDeleteMovie} />  
              )}

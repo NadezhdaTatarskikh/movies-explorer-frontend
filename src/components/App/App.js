@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -70,6 +71,7 @@ function App() {
       .then((data) => {
         setLoggedIn(true);
         setSavedMovies(data);
+        setAllMovies(data);
       })
       .catch((err) => {
         console.log(err);
@@ -170,27 +172,13 @@ function App() {
     } else {
       setErrorMessage('');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [foundMoviesList]);
-  
-
-  // Отслеживаем состояние стэйта чекбокса
-  useEffect(() => {
-    if (localStorage.getItem('shortSavedMovieCheckbox') === 'true') {
-      setShortSavedMovieCheckbox(true);
-//      setShowAllMovies(filterShortMovies(savedMovies));
-    } else {
-      setShortSavedMovieCheckbox(false);
-//      setShowAllMovies(savedMovies);
-    }
-  }, [savedMovies]);
 
   // Меняем состояние чекбокса на короткометражки
   const handleChangeCheckboxSavedMovies = () => {
     if (!shortSavedMovieCheckbox) {
       localStorage.setItem('shortSavedMovieCheckbox', true);
       setShortSavedMovieCheckbox(true);
-     // setShowAllMovies(filterShortMovies(filterSavedMovies));
       if (filterShortMovies(filterSavedMovies).length === 0) {
         setIsNotFound(true);
       }
