@@ -11,11 +11,9 @@ const MoviesCardList = ({
   isNotFound,
   isServerError,
 }) => {
-
-
   return (
     <section className='cards'>
-       <p className={isNotFound ? 'cards__errors_visible' : 'cards__errors'}>
+      <p className={isNotFound ? 'cards__errors_visible' : 'cards__errors'}>
         {ERRORS.NOT_FOUND}
       </p>
       <p className={isServerError ? 'cards__errors_visible' : 'cards__errors'}>

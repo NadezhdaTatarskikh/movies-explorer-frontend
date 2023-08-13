@@ -1,7 +1,6 @@
 import './FilterCheckbox.css';
 
 const FilterCheckbox = ({ onCheckbox, checked }) => {
-
   return (
     <div className='checkbox'>
       <input

@@ -6,18 +6,18 @@ import { useFormValidation } from '../../hooks/useFormValidation';
 const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue }) => {
   const [errorText, setErrorText] = useState(''); // Переменная состояния ошибки
   const [keyword, setKeyword] = useState(''); // ВВедёные значения по ключевому слову
-  const {isValid, handleChange} = useFormValidation();
+  const { isValid, handleChange } = useFormValidation();
 
-// Эффект отслеживания состояния поля input поиска
-useEffect(() => {
-  setKeyword(defaultValue);
-}, [defaultValue]);
+  // Эффект отслеживания состояния поля input поиска
+  useEffect(() => {
+    setKeyword(defaultValue);
+  }, [defaultValue]);
 
   // обработчик вводимых данных
   const handleFormChange = (evt) => {
     setKeyword(evt.target.value);
-    handleChange(evt)
-   }
+    handleChange(evt);
+  };
   // обработчик сабмита формы
   const handleFormSubmit = (evt) => {
     evt.preventDefault(); // отменяем действие по умолчанию
@@ -25,7 +25,7 @@ useEffect(() => {
       setErrorText('Введите ключевое слово');
       return;
     }
-    onSubmit(keyword)
+    onSubmit(keyword);
   };
 
   return (
