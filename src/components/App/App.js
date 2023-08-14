@@ -54,7 +54,7 @@ function App() {
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (!jwt) {
-      return;
+      return setLoggedIn(false);
     }
     mainApi
       .getUserInfo(jwt)
@@ -64,6 +64,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setLoggedIn(false);
       });
     mainApi
       .getSavedMovies(jwt)
@@ -74,6 +75,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setLoggedIn(false);
       });
   };
 
@@ -86,6 +88,7 @@ function App() {
       })
       .catch((err) => {
         if (err === 'Ошибка: 500') {
+          console.log(err)
           setErrorMessage(RES_ERRORS.SERVER_500);
         }
         if (err === 'Ошибка: 409') {
@@ -118,6 +121,7 @@ function App() {
             setCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
             localStorage.setItem('movies', JSON.stringify(userMovies));
             setAllMovies(JSON.parse(localStorage.getItem('movies')));
+            setShowAllMovies(userMovies)
           }
         );
       })
@@ -158,7 +162,6 @@ function App() {
           setIsEditUserInfoStatus(RES_ERRORS.UPDATE_DEFAULT_400);
         }
       })
-      .finally(() => setIsEditUserInfoStatus(false));
   };
   // -------------------------SAVEDMOVIES----------------------------- //
 

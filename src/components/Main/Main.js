@@ -8,10 +8,10 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import './Main.css';
 
-const Main = () => {
+const Main = ({ loggedIn }) => {
   return (
     <>
-      <Header />
+       <Header loggedIn={loggedIn}/>
       <main className='main'>
         <Promo />
         <AboutProject />

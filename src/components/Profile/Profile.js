@@ -9,7 +9,7 @@ const Profile = ({
   onUpdateUser,
   loggedIn,
   logOut,
-  setIsEditUserInfoStatus,
+  isEditUserInfoStatus,
 }) => {
   const { values, handleChange, errors, isValid, setValues, resetForm } =
     useFormValidation();
@@ -17,9 +17,7 @@ const Profile = ({
   const [isSuccess, setIsSuccess] = useState(false);
   const [isInputDisabled, setIsInputDisabled] = useState(false);
 
-  const disableButton =
-    !isValid ||
-    (currentUser.name === values.name && currentUser.email === values.email);
+  const disableButton = (!isValid || (currentUser.name === values.name && currentUser.email === values.email));
 
   // отображаем текущие данные в инпутах
   useEffect(() => {
@@ -94,7 +92,7 @@ const Profile = ({
           </div>
           <span className='profile__form-error'>{errors.email || ''}</span>
           {isSuccess && (
-            <p className='profile__form-status'>{setIsEditUserInfoStatus}</p>
+            <p className='profile__form-status'>{isEditUserInfoStatus}</p>
           )}
           <div className='profile__button-container'>
             {!isInputDisabled ? (
