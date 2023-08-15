@@ -48,8 +48,6 @@ function App() {
   //добавили хук истории
   const navigate = useNavigate();
 
-  const location = useLocation().pathname;
-
   useEffect(() => {
     if (!loggedIn)
     handleTokenCheck();
@@ -230,12 +228,15 @@ function App() {
     }
   };
 
+  const location = useLocation();
+
   useEffect (() => {
     if (location.pathname === '/saved-movies') {
       setShortSavedMovieCheckbox(false);
       setShowAllMovies(savedMovies);
     }
-  }, [location, savedMovies]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   // ------------------------------------MOVIES----------------------- //
 
