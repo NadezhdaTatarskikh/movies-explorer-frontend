@@ -195,6 +195,7 @@ function App() {
   // Меняем состояние чекбокса на короткометражки
   const handleChangeCheckboxSavedMovies = () => {
     if (!shortSavedMovieCheckbox) {
+      localStorage.setItem('shortSavedMovieCheckbox', true);
       setShortSavedMovieCheckbox(true);
       setShowAllMovies(filterShortMovies(filterSavedMovies));
       if (filterShortMovies(filterSavedMovies).length === 0) {
@@ -203,6 +204,7 @@ function App() {
       setIsNotFound(false);
     } else {
       setShortSavedMovieCheckbox(false);
+      localStorage.setItem('shortSavedMovieCheckbox', true);
       if (filterSavedMovies.length === 0) {
         setIsNotFound(true);
       }
