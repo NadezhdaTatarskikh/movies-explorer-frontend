@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, redirect } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import * as mainApi from '../../utils/MainApi';
 import './App.css';
@@ -18,9 +18,10 @@ import { RES_ERRORS, ERRORS } from '../../utils/Constants';
 
 function App() {
   // Стейты состояния пользователя
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isEditUserInfoStatus, setIsEditUserInfoStatus] = useState('');
+  const [isTokenChecked, setIsTokenChecked] = useState(false);
 
   // Стейты ошибок
   const [errorMessage, setErrorMessage] = useState();
@@ -54,7 +55,7 @@ function App() {
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (!jwt) {
-      return setLoggedIn(false);
+      setIsTokenChecked(true);
     }
     mainApi
       .getUserInfo(jwt)
@@ -65,7 +66,8 @@ function App() {
       .catch((err) => {
         console.log(err);
         setLoggedIn(false);
-      });
+      })
+      .finally(() => setIsTokenChecked(true));
     mainApi
       .getSavedMovies(jwt)
       .then((data) => {
@@ -367,6 +369,7 @@ function App() {
               <ProtectedRoute
                 element={Movies}
                 loggedIn={loggedIn}
+                isTokenChecked={isTokenChecked}
                 movies={foundMoviesList}
                 isLoading={isLoading}
                 onSaveMovie={onLike}
@@ -388,6 +391,7 @@ function App() {
               <ProtectedRoute
                 element={SavedMovies}
                 loggedIn={loggedIn}
+                isTokenChecked={isTokenChecked}
                 movies={showAllMovies}
                 onSubmit={handleSearchSavedMovies}
                 onCheckbox={handleChangeCheckboxSavedMovies}
@@ -405,6 +409,7 @@ function App() {
               <ProtectedRoute
                 element={Profile}
                 loggedIn={loggedIn}
+                isTokenChecked={isTokenChecked}
                 onUpdateUser={handleUpdateUser}
                 logOut={handleLogOut}
                 setErrorMessage={setErrorMessage}
@@ -418,6 +423,7 @@ function App() {
               <Login
                 onLogin={handleAuthorization}
                 loggedIn={loggedIn}
+                isTokenChecked={isTokenChecked}
                 errorMessage={errorMessage}
               />
             }
@@ -428,6 +434,7 @@ function App() {
               <Register
                 onRegister={handleRegistration}
                 loggedIn={loggedIn}
+                isTokenChecked={isTokenChecked}
                 errorMessage={errorMessage}
               />
             }
