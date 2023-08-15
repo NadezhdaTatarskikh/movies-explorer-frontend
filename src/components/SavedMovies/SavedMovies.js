@@ -11,6 +11,7 @@ const SavedMovies = ({
   checkLike,
   onSubmit,
   checked,
+  isNotFound,
   savedMovies,
   onLike,
   onDelete,
@@ -31,6 +32,7 @@ const SavedMovies = ({
           savedMovies={savedMovies}
           isMoviesPage={false}
           checkLike={checkLike}
+          isNotFound={isNotFound}
         />
       </main>
       <Footer />
