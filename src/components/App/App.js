@@ -204,7 +204,7 @@ function App() {
       setIsNotFound(false);
     } else {
       setShortSavedMovieCheckbox(false);
-      localStorage.setItem('shortSavedMovieCheckbox', true);
+      localStorage.setItem('shortSavedMovieCheckbox', false);
       if (filterSavedMovies.length === 0) {
         setIsNotFound(true);
       }
@@ -229,6 +229,7 @@ function App() {
       setShowAllMovies(foundSavedMovies);
     }
   };
+
 
   const location = useLocation();
 
@@ -355,7 +356,7 @@ function App() {
 
   // обработчик выхода пользователя из аккаунта, обращение к API, очистка локального хранилища
   const handleLogOut = () => {
-    localStorage.clear(); // удаление данных из localstorage
+   localStorage.clear(); // удаление данных из localstorage
     // сбрасываем все стейты при разлогинивании
     setLoggedIn(false);
     handleTokenCheck(null);
