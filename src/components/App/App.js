@@ -77,6 +77,7 @@ function App() {
         setLoggedIn(true);
         setSavedMovies(data);
         setFilterSavedMovies(data);
+        
       })
       .catch((err) => {
         console.log(err);
@@ -126,7 +127,7 @@ function App() {
             setCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
             localStorage.setItem('movies', JSON.stringify(userMovies));
             setAllMovies(JSON.parse(localStorage.getItem('movies')));
-            setShowAllMovies(userMovies)
+            setShowAllMovies(userMovies);
           }
         );
       })
@@ -194,9 +195,10 @@ function App() {
 
   // Меняем состояние чекбокса на короткометражки
   const handleChangeCheckboxSavedMovies = () => {
+    setShortSavedMovieCheckbox(!shortSavedMovieCheckbox);
     if (!shortSavedMovieCheckbox) {
-      localStorage.setItem('shortSavedMovieCheckbox', true);
       setShortSavedMovieCheckbox(true);
+      localStorage.setItem('shortSavedMovieCheckbox', true);
       setShowAllMovies(filterShortMovies(filterSavedMovies));
       if (filterShortMovies(filterSavedMovies).length === 0) {
         setIsNotFound(true);
@@ -204,7 +206,7 @@ function App() {
       setIsNotFound(false);
     } else {
       setShortSavedMovieCheckbox(false);
-      localStorage.setItem('shortSavedMovieCheckbox', false);
+      localStorage.setItem('shortSavedMovieCheckbox', !shortSavedMovieCheckbox);
       if (filterSavedMovies.length === 0) {
         setIsNotFound(true);
       }
@@ -230,17 +232,7 @@ function App() {
     }
   };
 
-
-  const location = useLocation();
-
-  useEffect (() => {
-    if (location.pathname === '/saved-movies') {
-      setShortSavedMovieCheckbox(false);
-      setShowAllMovies(savedMovies);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
-
+  
   // ------------------------------------MOVIES----------------------- //
 
   // Отслеживание состояния стэйтов
@@ -368,6 +360,7 @@ function App() {
     setSearchKeyword('');
     setFoundMoviesList([]);
     setCurrentUser({});
+    setIsTokenChecked(false);
     // переадресация на главную страницу
     navigate('/');
   };
