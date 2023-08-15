@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { Routes, Route, useNavigate, redirect } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import UnauthorizedRoute from '../ProtectedRoute/UnauthorizedRoute';
 import * as mainApi from '../../utils/MainApi';
 import './App.css';
 import Main from '../Main/Main';
@@ -47,7 +48,10 @@ function App() {
   //добавили хук истории
   const navigate = useNavigate();
 
+  const location = useLocation().pathname;
+
   useEffect(() => {
+    if (!loggedIn)
     handleTokenCheck();
   }, [loggedIn]);
 
@@ -56,6 +60,7 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     if (!jwt) {
       setIsTokenChecked(true);
+      return;
     }
     mainApi
       .getUserInfo(jwt)
@@ -192,7 +197,6 @@ function App() {
   // Меняем состояние чекбокса на короткометражки
   const handleChangeCheckboxSavedMovies = () => {
     if (!shortSavedMovieCheckbox) {
-      localStorage.setItem('shortSavedMovieCheckbox', true);
       setShortSavedMovieCheckbox(true);
       setShowAllMovies(filterShortMovies(filterSavedMovies));
       if (filterShortMovies(filterSavedMovies).length === 0) {
@@ -201,7 +205,6 @@ function App() {
       setIsNotFound(false);
     } else {
       setShortSavedMovieCheckbox(false);
-      localStorage.setItem('shortSavedMovieCheckbox', false);
       if (filterSavedMovies.length === 0) {
         setIsNotFound(true);
       }
@@ -226,6 +229,13 @@ function App() {
       setShowAllMovies(foundSavedMovies);
     }
   };
+
+  useEffect (() => {
+    if (location.pathname === '/saved-movies') {
+      setShortSavedMovieCheckbox(false);
+      setShowAllMovies(savedMovies);
+    }
+  }, [location, savedMovies]);
 
   // ------------------------------------MOVIES----------------------- //
 
@@ -420,7 +430,8 @@ function App() {
           <Route
             path='/signin'
             element={
-              <Login
+              <UnauthorizedRoute
+                element={Login}
                 onLogin={handleAuthorization}
                 loggedIn={loggedIn}
                 isTokenChecked={isTokenChecked}
@@ -431,7 +442,8 @@ function App() {
           <Route
             path='/signup'
             element={
-              <Register
+              <UnauthorizedRoute
+                element={Register}
                 onRegister={handleRegistration}
                 loggedIn={loggedIn}
                 isTokenChecked={isTokenChecked}
