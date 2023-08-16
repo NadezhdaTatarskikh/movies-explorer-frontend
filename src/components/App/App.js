@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import UnauthorizedRoute from '../ProtectedRoute/UnauthorizedRoute';
+import ProtectedRoute from '../Route/ProtectedRoute';
+import UnauthorizedRoute from '../Route/UnauthorizedRoute';
 import * as mainApi from '../../utils/MainApi';
 import './App.css';
 import Main from '../Main/Main';
@@ -76,8 +76,8 @@ function App() {
       .then((data) => {
         setLoggedIn(true);
         setSavedMovies(data);
-        setFilterSavedMovies(data);
-        
+        setFilterSavedMovies(data);  
+        setShowAllMovies(data);
       })
       .catch((err) => {
         console.log(err);
@@ -127,7 +127,6 @@ function App() {
             setCurrentUser(userInfo); // данные записываются в глобальную стейт-переменную
             localStorage.setItem('movies', JSON.stringify(userMovies));
             setAllMovies(JSON.parse(localStorage.getItem('movies')));
-            setShowAllMovies(userMovies);
           }
         );
       })
@@ -231,8 +230,16 @@ function App() {
       setShowAllMovies(foundSavedMovies);
     }
   };
+const location = useLocation();
 
-  
+  useEffect (() => {
+    if (location.pathname === '/saved-movies') {
+      setShortSavedMovieCheckbox(false);
+      setShowAllMovies(savedMovies);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
   // ------------------------------------MOVIES----------------------- //
 
   // Отслеживание состояния стэйтов
@@ -340,6 +347,7 @@ function App() {
       .deleteMovie(deleteCard._id, jwt)
       .then(() => {
         setSavedMovies(savedMovies.filter((c) => c._id !== deleteCard._id));
+        setFilterSavedMovies(savedMovies.filter((c) => c._id !== deleteCard._id));
       })
       .catch((err) => {
         console.log(err);
