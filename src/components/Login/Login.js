@@ -3,8 +3,9 @@ import Auth from '../Auth/Auth';
 import Form from '../Form/Form';
 import AuthWithForm from '../AuthWithForm/AuthWithForm';
 import { useFormValidation } from '../../hooks/useFormValidation';
+import { Navigate } from 'react-router-dom';
 
-const Login = ({ onLogin, errorMessage }) => {
+const Login = ({ onLogin, errorMessage, loggedIn }) => {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormValidation();
 
@@ -19,6 +20,9 @@ const Login = ({ onLogin, errorMessage }) => {
     onLogin(values);
     resetForm();
   };
+
+  if (loggedIn) return (<Navigate to='/' replace />)
+
   return (
     <>
       <Auth

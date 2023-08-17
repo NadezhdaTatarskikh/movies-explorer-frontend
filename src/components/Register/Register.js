@@ -3,8 +3,9 @@ import Auth from '../Auth/Auth';
 import AuthWithForm from '../AuthWithForm/AuthWithForm';
 import Form from '../Form/Form';
 import { useFormValidation } from '../../hooks/useFormValidation';
+import { Navigate } from 'react-router-dom';
 
-const Register = ({ onRegister, errorMessage }) => {
+const Register = ({ onRegister, errorMessage, loggedIn }) => {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormValidation();
 
@@ -17,6 +18,9 @@ const Register = ({ onRegister, errorMessage }) => {
     onRegister(values);
     resetForm();
   };
+
+  if (loggedIn) return (<Navigate to='/' replace />)
+  
   return (
     <>
       <Auth

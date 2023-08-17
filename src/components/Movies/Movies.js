@@ -25,7 +25,6 @@ const Movies = ({
   isNotFound,
   isServerError,
   movies,
-  searchKeyword,
   onCheckbox,
   checked,
   checkLike,
@@ -57,6 +56,8 @@ const Movies = ({
   const handleButtonClick = () => {
     setMoviesList(moviesList + numberAddMovies);
   };
+
+  const searchKeyword = localStorage.getItem('searchKeyword') || '';
 
   return (
     <>

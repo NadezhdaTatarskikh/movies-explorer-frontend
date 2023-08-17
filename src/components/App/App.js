@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../Route/ProtectedRoute';
-import UnauthorizedRoute from '../Route/UnauthorizedRoute';
 import * as mainApi from '../../utils/MainApi';
 import './App.css';
 import Main from '../Main/Main';
@@ -389,7 +388,6 @@ const location = useLocation();
                 isLoading={isLoading}
                 onSaveMovie={onLike}
                 onCheckbox={handleChangeCheckbox}
-                searchKeyword={searchKeyword}
                 checked={shortMovieCheckbox}
                 checkLike={checkLike}
                 onSubmit={handleRequestMovies}
@@ -435,8 +433,7 @@ const location = useLocation();
           <Route
             path='/signin'
             element={
-              <UnauthorizedRoute
-                element={Login}
+              <Login
                 onLogin={handleAuthorization}
                 loggedIn={loggedIn}
                 isTokenChecked={isTokenChecked}
@@ -447,8 +444,7 @@ const location = useLocation();
           <Route
             path='/signup'
             element={
-              <UnauthorizedRoute
-                element={Register}
+              <Register
                 onRegister={handleRegistration}
                 loggedIn={loggedIn}
                 isTokenChecked={isTokenChecked}
