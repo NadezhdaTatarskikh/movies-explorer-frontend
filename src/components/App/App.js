@@ -255,8 +255,11 @@ const location = useLocation();
     if (localStorage.getItem('foundMoviesList')) {
       const movies = JSON.parse(localStorage.getItem('foundMoviesList'));
       setListFoundMovies(movies);
+      if (movies.length === 0) {
+        setIsNotFound(true);
+      }
       if (localStorage.getItem('shortMovieCheckbox') === 'true') {
-        setFoundMoviesList(filterShortMovies(movies));
+        setFoundMoviesList(filterShortMovies(movies));       
       } else {
         setFoundMoviesList(movies);
       }
@@ -268,12 +271,16 @@ const location = useLocation();
     setShortMovieCheckbox(!shortMovieCheckbox);
     console.log(shortMovieCheckbox);
     if (!shortMovieCheckbox) {
-      setFoundMoviesList(filterShortMovies(listFoundMovies));
-      if (foundMoviesList.length === 0) {
+      const filteredShortMovies = filterShortMovies(listFoundMovies);
+      setFoundMoviesList(filteredShortMovies);
+      if (filteredShortMovies.length === 0) {
         setIsNotFound(true);
       }
     } else {
       setFoundMoviesList(listFoundMovies);
+      if (listFoundMovies.length > 0) {
+        setIsNotFound(false);
+      }
     }
     localStorage.setItem('shortMovieCheckbox', !shortMovieCheckbox);
   };
