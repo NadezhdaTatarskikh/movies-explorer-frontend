@@ -16,14 +16,8 @@ export const convertMinToHours = (number) => {
 // обработчик поискового запроса по ключевому слову
 export const searchMovies = (movies, keyword, checkbox) => {
   const moviesSearchКeyword = movies.filter((movie) => {
-    const movieNameRu = String(movie.nameRU).toLowerCase().trim(); // записываем русское название в нижнем регистре в переменную
-    const movieNameEn = String(movie.nameEN).toLowerCase().trim(); // записываем английское название в нижнем регистре в переменную
-    const keywordMovie = keyword.toLowerCase().trim(); // записываем текст запроса в нижнем регистре в переменную
-    return (
-      movieNameRu.indexOf(keywordMovie) !== -1 ||
-      movieNameEn.indexOf(keywordMovie) !== -1
-    ); // при совпадении добавляем в cписок фильмов по критериям
-  });
+    return movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase())
+  })
   if (checkbox) {
     return filterShortMovies(moviesSearchКeyword);
   } else {
@@ -33,5 +27,5 @@ export const searchMovies = (movies, keyword, checkbox) => {
 
 // фильтрация по длительности фильма
 export const filterShortMovies = (movies) => {
-  return movies.filter((movie) => movie.duration < SHORT_MOVIES);
+  return movies.filter((movie) => movie.duration <= SHORT_MOVIES);
 };

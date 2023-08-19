@@ -32,25 +32,25 @@ const Movies = ({
   onSaveMovie,
   onDelete,
 }) => {
-  const screenwidth = useScreenWidth(); // получаем значение ширины экрана
-  const [numberAddMovies, setNumberAddMovies] = useState({}); // число добавляемых карточек, при нажатии на кнопку ещё
+  const screenWidth = useScreenWidth(); // получаем значение ширины экрана
+  const [numberAddMovies, setNumberAddMovies] = useState(''); // число добавляемых карточек, при нажатии на кнопку ещё
   const [moviesList, setMoviesList] = useState({}); // стейт показываемых на странице карточек
 
   // эффект, устанавливаем кол-во карточек в зависимости от ширины карточек
   useEffect(() => {
-    if (screenwidth > SCREEN_XL) {
+    if (screenWidth > SCREEN_XL) {
       setMoviesList(NUMBER_CARDS_12);
       setNumberAddMovies(NUMBER_ADDED_CARDS_3);
     }
-    if (screenwidth < SCREEN_LG && screenwidth >= SCREEN_MD) {
+    if (screenWidth < SCREEN_LG && screenWidth >= SCREEN_MD) {
       setMoviesList(NUMBER_CARDS_8);
       setNumberAddMovies(NUMBER_ADDED_CARDS_2);
     }
-    if (screenwidth < SCREEN_XS) {
+    if (screenWidth < SCREEN_XS) {
       setMoviesList(NUMBER_CARDS_5);
       setNumberAddMovies(NUMBER_ADDED_CARDS_2);
     }
-  }, [screenwidth]);
+  }, [screenWidth]);
 
   // обработчик нажатий на кнопку 'Ещё'
   const handleButtonClick = () => {

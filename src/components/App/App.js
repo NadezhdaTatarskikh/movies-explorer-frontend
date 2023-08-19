@@ -181,37 +181,38 @@ function App() {
 
 
   // Отслеживаем состояние стэйта чекбокса
-  useEffect(() => {
-    if (localStorage.getItem('shortSavedMovieCheckbox') === 'true') {
-      setShortSavedMovieCheckbox(true);
-      setShowAllMovies(filterShortMovies(savedMovies));
-    } else {
-      setShortSavedMovieCheckbox(false);
-      setShowAllMovies(savedMovies);
-    }
-  }, [savedMovies]);
+useEffect(() => {
+  if (localStorage.getItem('shortSavedMovieCheckbox') === 'true') {
+    setShortSavedMovieCheckbox(true);
+    setShowAllMovies(filterShortMovies(savedMovies))
+  } else {
+    setShortSavedMovieCheckbox(false);
+    setShowAllMovies(savedMovies);
+  }
+}, [savedMovies]);
 
   // Меняем состояние чекбокса на короткометражки
-  const handleChangeCheckboxSavedMovies = () => {
-    setShortSavedMovieCheckbox(!shortSavedMovieCheckbox);
-    if (!shortSavedMovieCheckbox) {
-      setShortSavedMovieCheckbox(true);
-      localStorage.setItem('shortSavedMovieCheckbox', true);
-      setShowAllMovies(filterShortMovies(filterSavedMovies));
-      if (filterShortMovies(filterSavedMovies).length === 0) {
-        setIsNotFound(true);
-      }
-      setIsNotFound(false);
-    } else {
-      setShortSavedMovieCheckbox(false);
-      localStorage.setItem('shortSavedMovieCheckbox', !shortSavedMovieCheckbox);
-      if (filterSavedMovies.length === 0) {
-        setIsNotFound(true);
-      }
-      setIsNotFound(false);
+const handleChangeCheckboxSavedMovies = () => {
+  setShortSavedMovieCheckbox(!shortSavedMovieCheckbox);
+  if (!shortSavedMovieCheckbox) {
+    localStorage.setItem('shortSavedMovieCheckbox', true);
+    setShortSavedMovieCheckbox(true);
+    setShowAllMovies(filterShortMovies(filterSavedMovies));
+    if (filterShortMovies(filterSavedMovies).length === 0) {
+      setIsNotFound(true);
+    } 
+    setIsNotFound(false);
+  } else {
+    setShortSavedMovieCheckbox(false);
+    localStorage.setItem('shortSavedMovieCheckbox', false);
+    if (filterSavedMovies.length === 0) {
+      setIsNotFound(true);
       setShowAllMovies(filterSavedMovies);
     }
-  };
+    setIsNotFound(false);
+    setShowAllMovies(filterSavedMovies);
+  }
+};
 
   // Поиск среди сохранённых фильмов
   const handleSearchSavedMovies = (keyword) => {
@@ -229,6 +230,7 @@ function App() {
       setShowAllMovies(foundSavedMovies);
     }
   };
+  
 const location = useLocation();
 
   useEffect (() => {
@@ -289,6 +291,11 @@ const location = useLocation();
     setTimeout(() => setIsLoading(false), 1000);
   };
 
+   // Проверяем сохранение фильма
+   const checkLike = (movie) => {
+    return savedMovies.some((item) => item.movieId === movie.id);
+  };
+
   // Обработаем запрос пользователя по поиску фильмов
   const handleRequestMovies = (keyword) => {
     localStorage.setItem('searchKeyword', keyword); // Записываем в сторедж введенное ключевое слово
@@ -314,11 +321,6 @@ const location = useLocation();
     } else {
       handleSetFilterMovies(allMovies, keyword, shortMovieCheckbox);
     }
-  };
-
-  // Проверяем сохранение фильма
-  const checkLike = (movie) => {
-    return savedMovies.some((item) => item.movieId === movie.id);
   };
 
   // Обработчик запоса на сохранённые фильмы
