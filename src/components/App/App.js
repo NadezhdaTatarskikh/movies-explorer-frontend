@@ -172,7 +172,6 @@ function App() {
 
   useEffect(() => {
     if (savedMovies.length === 0) return;
-    if (!searchKeyword) return setErrorMessage(ERRORS.NEED_LETTERS);
     if (foundMoviesList.length === 0) {
       setErrorMessage(ERRORS.NOT_FOUND);
     } else {
@@ -340,6 +339,7 @@ const location = useLocation();
       .addMovie(movie, jwt)
       .then((newMovie) => {
         setSavedMovies([...savedMovies, newMovie]);
+        setFilterSavedMovies([...savedMovies, newMovie]);
         console.log('Карточка создана:', movie);
       })
       .catch((err) => {
