@@ -225,7 +225,8 @@ const handleChangeCheckboxSavedMovies = () => {
     );
     if (foundSavedMovies.length === 0) {
       setIsNotFoundSaved(true);
-      setShowAllMovies(filterSavedMovies)
+      setShowAllMovies(foundSavedMovies);
+      setFilterSavedMovies(foundSavedMovies);
     } else {
       setIsNotFoundSaved(false);
       setFilterSavedMovies(foundSavedMovies);
