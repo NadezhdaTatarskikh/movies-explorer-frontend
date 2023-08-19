@@ -225,6 +225,7 @@ const handleChangeCheckboxSavedMovies = () => {
     );
     if (foundSavedMovies.length === 0) {
       setIsNotFoundSaved(true);
+      setShowAllMovies(filterSavedMovies)
     } else {
       setIsNotFoundSaved(false);
       setFilterSavedMovies(foundSavedMovies);
@@ -415,7 +416,7 @@ const location = useLocation();
                 onCheckbox={handleChangeCheckboxSavedMovies}
                 checkLike={checkLike}
                 saveMovie={savedMovies}
-                isNotFoundSaved={isNotFoundSaved}
+                isNotFound={isNotFoundSaved}
                 checked={shortSavedMovieCheckbox}
                 onDelete={handleDeleteMovie}
               />
