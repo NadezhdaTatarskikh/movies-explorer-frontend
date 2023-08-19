@@ -28,6 +28,7 @@ function App() {
   const [isServerError, setIsServerError] = useState(false); //Произошла ошибка при поиске фильмов
   const [isNotFound, setIsNotFound] = useState(false); // Фильмы по запросу не найдены
   const [isLoading, setIsLoading] = useState(false); // // стейт загрузки данных
+  const [isNotFoundSaved, setIsNotFoundSaved] = useState(false);
 
   // Стейты состояния по фильмам
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов
@@ -199,17 +200,17 @@ const handleChangeCheckboxSavedMovies = () => {
     setShortSavedMovieCheckbox(true);
     setShowAllMovies(filterShortMovies(filterSavedMovies));
     if (filterShortMovies(filterSavedMovies).length === 0) {
-      setIsNotFound(true);
+      setIsNotFoundSaved(true);
     } 
-    setIsNotFound(false);
+    setIsNotFoundSaved(false);
   } else {
     setShortSavedMovieCheckbox(false);
     localStorage.setItem('shortSavedMovieCheckbox', false);
     if (filterSavedMovies.length === 0) {
-      setIsNotFound(true);
+      setIsNotFoundSaved(true);
       setShowAllMovies(filterSavedMovies);
     }
-    setIsNotFound(false);
+    setIsNotFoundSaved(false);
     setShowAllMovies(filterSavedMovies);
   }
 };
@@ -223,9 +224,9 @@ const handleChangeCheckboxSavedMovies = () => {
       shortSavedMovieCheckbox
     );
     if (foundSavedMovies.length === 0) {
-      setIsNotFound(true);
+      setIsNotFoundSaved(true);
     } else {
-      setIsNotFound(false);
+      setIsNotFoundSaved(false);
       setFilterSavedMovies(foundSavedMovies);
       setShowAllMovies(foundSavedMovies);
     }
@@ -370,6 +371,8 @@ const location = useLocation();
     setFoundMoviesList([]);
     setCurrentUser({});
     setIsTokenChecked(false);
+    setIsNotFoundSaved(false);
+    setIsNotFound(false);
     // переадресация на главную страницу
     navigate('/');
   };
@@ -412,7 +415,7 @@ const location = useLocation();
                 onCheckbox={handleChangeCheckboxSavedMovies}
                 checkLike={checkLike}
                 saveMovie={savedMovies}
-                isNotFound={isNotFound}
+                isNotFoundSaved={isNotFoundSaved}
                 checked={shortSavedMovieCheckbox}
                 onDelete={handleDeleteMovie}
               />
