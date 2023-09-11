@@ -1,0 +1,45 @@
+.movies {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin: 0 auto;
+   max-width: 1140px;
+   width: calc(100% - 140px);
+}
+.movies__button {
+   box-sizing: border-box;
+   margin: 50px 0 80px;
+   color: #FFF;
+   text-align: center;
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: 16px;
+   border-radius: 6px;
+   background: #2F2F2F;
+   border: none;
+   cursor: pointer;
+   padding: 11px 0 9px;
+}
+
+.movies__button:hover {
+   transition: opacity 0.5s linear;
+   opacity: 0.5;
+}
+.movies__button_hidden {
+   visibility: hidden;
+}
+
+@media screen and (max-width: 520px) {
+   .movies {
+      width: calc(100% - 60px);
+   }
+}
+
+@media screen and (max-width: 428px) {
+   .movies {
+        max-width: 320px;
+        width: calc(100% - 20px);
+   }
+
+}
